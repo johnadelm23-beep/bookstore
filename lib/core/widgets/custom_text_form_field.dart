@@ -2,27 +2,45 @@ import 'package:book_stroe/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class CustomTextFormField extends StatelessWidget {
-  const CustomTextFormField({
+class CustomTextFormField extends StatefulWidget {
+  CustomTextFormField({
     super.key,
     required this.hintText,
-    this.obscureText = false,
-    this.suffixIcon,
+    this.controller,
+    this.isPassword = true,
   });
   final String hintText;
-  final bool obscureText;
-  final IconData? suffixIcon;
+  final TextEditingController? controller;
+  bool isPassword;
 
+  @override
+  State<CustomTextFormField> createState() => _CustomTextFormFieldState();
+}
+
+class _CustomTextFormFieldState extends State<CustomTextFormField> {
+  bool isObsecure = true;
   @override
   Widget build(BuildContext context) {
     return TextField(
-      obscureText: obscureText,
+      controller: widget.controller,
+      obscureText: widget.isPassword && isObsecure,
       onTapOutside: (v) {
         FocusManager.instance.primaryFocus?.unfocus();
       },
       decoration: InputDecoration(
-        suffixIcon: Icon(suffixIcon),
-        hintText: hintText,
+        suffixIcon: widget.isPassword
+            ? InkWell(
+                onTap: () {
+                  setState(() {
+                    isObsecure = !isObsecure;
+                  });
+                },
+                child: isObsecure
+                    ? Icon(Icons.visibility_off)
+                    : Icon(Icons.visibility),
+              )
+            : null,
+        hintText: widget.hintText,
         hintStyle: TextStyle(color: Colors.grey),
         filled: true,
         fillColor: AppColors.textFieldColor,
