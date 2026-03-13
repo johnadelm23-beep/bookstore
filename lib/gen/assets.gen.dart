@@ -11,6 +11,32 @@
 
 import 'package:flutter/widgets.dart';
 
+class $AssetsFontsGen {
+  const $AssetsFontsGen();
+
+  /// File path: assets/fonts/DMSerifDisplay-Italic.ttf
+  String get dMSerifDisplayItalic => 'assets/fonts/DMSerifDisplay-Italic.ttf';
+
+  /// File path: assets/fonts/DMSerifDisplay-Regular.ttf
+  String get dMSerifDisplayRegular => 'assets/fonts/DMSerifDisplay-Regular.ttf';
+
+  /// List of all assets
+  List<String> get values => [dMSerifDisplayItalic, dMSerifDisplayRegular];
+}
+
+class $AssetsIconsGen {
+  const $AssetsIconsGen();
+
+  /// File path: assets/icons/apple.svg
+  String get apple => 'assets/icons/apple.svg';
+
+  /// File path: assets/icons/google.svg
+  String get google => 'assets/icons/google.svg';
+
+  /// List of all assets
+  List<String> get values => [apple, google];
+}
+
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
@@ -55,6 +81,8 @@ class $AssetsImagesSplashGen {
 class Assets {
   const Assets._();
 
+  static const $AssetsFontsGen fonts = $AssetsFontsGen();
+  static const $AssetsIconsGen icons = $AssetsIconsGen();
   static const $AssetsImagesGen images = $AssetsImagesGen();
   static const $AssetsTranslationsGen translations = $AssetsTranslationsGen();
 }

@@ -6,5 +6,6 @@ abstract class  LocaleKeys {
   static const login = 'login';
   static const welcomeMessage = 'welcomeMessage';
   static const register = 'register';
+  static const loginMessage = 'loginMessage';
 
 }
