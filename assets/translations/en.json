@@ -2,5 +2,22 @@
   "login": "Login",
   "welcomeMessage": "Order your Book Now!",
   "register": "Register",
-  "loginMessage": "Welcome back! Glad to see you, Again!"
+  "loginMessage": "Welcome back! Glad to see you, Again!",
+  "eneterEmail": "Enter your email",
+  "enterPassord": "Enter your Password",
+  "forgetPassord": "Forgot Password?",
+  "signGoogle": "Sign in with Google",
+  "signApple": "Sign in with Apple",
+  "dontnotHaveAccount": "Don't have an account?",
+  "registerNow": " Register Now",
+  "registerMessage": "Hello! Register to get started",
+  "userName": "Username",
+  "email": "Email",
+  "password": "Password",
+  "confirm": "Confirm Password",
+  "alreadyHaveAccount": "Already have an account?",
+  "registerLogin": " Login Now",
+  "forgetPasswordMessage": "Don't worry! It occurs. Please enter the email address linked with your account.",
+  "sendCode": "Send Code",
+  "remember": "Remember Password? "
 }

@@ -1,6 +1,23 @@
 {
-  "login": "تسجيل دخول",
-  "welcomeMessage": "احجز كتابك الان!",
-  "register": "انشاء حساب",
-  "loginMessage": "مرحبًا بعودتك! سعيدون برؤيتك مرة أخرى!"
+  "login": "تسجيل الدخول",
+  "welcomeMessage": "اطلب كتابك الآن!",
+  "register": "إنشاء حساب",
+  "loginMessage": "مرحبًا بعودتك! سعيدون برؤيتك مرة أخرى!",
+  "eneterEmail": "أدخل بريدك الإلكتروني",
+  "enterPassord": "أدخل كلمة المرور",
+  "forgetPassord": "هل نسيت كلمة المرور؟",
+  "signGoogle": "تسجيل الدخول باستخدام جوجل",
+  "signApple": "تسجيل الدخول باستخدام آبل",
+  "dontnotHaveAccount": "ليس لديك حساب؟",
+  "registerNow": "أنشئ حسابًا الآن",
+  "registerMessage": "مرحبًا! أنشئ حسابًا للبدء",
+  "userName": "اسم المستخدم",
+  "email": "البريد الإلكتروني",
+  "password": "كلمة المرور",
+  "confirm": "تأكيد كلمة المرور",
+  "alreadyHaveAccount": "هل لديك حساب بالفعل؟",
+  "registerLogin": "سجّل الدخول الآن",
+  "forgetPasswordMessage": "لا تقلق! يحدث ذلك. يرجى إدخال البريد الإلكتروني المرتبط بحسابك.",
+  "sendCode": "إرسال الرمز",
+  "remember": "تتذكر كلمة المرور؟"
 }

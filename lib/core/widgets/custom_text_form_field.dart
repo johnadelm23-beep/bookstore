@@ -3,15 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomTextFormField extends StatefulWidget {
-  CustomTextFormField({
+  const CustomTextFormField({
     super.key,
     required this.hintText,
     this.controller,
     this.isPassword = true,
+    this.validator,
   });
   final String hintText;
   final TextEditingController? controller;
-  bool isPassword;
+  final bool isPassword;
+  final String? Function(String?)? validator;
 
   @override
   State<CustomTextFormField> createState() => _CustomTextFormFieldState();
@@ -21,7 +23,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
   bool isObsecure = true;
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
       controller: widget.controller,
       obscureText: widget.isPassword && isObsecure,
       onTapOutside: (v) {

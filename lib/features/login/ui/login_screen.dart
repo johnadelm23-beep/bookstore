@@ -51,7 +51,7 @@ class _LoginScreenState extends State<LoginScreen> {
               SizedBox(height: 15.h),
 
               Text(
-                "Welcome back! Glad to see you, Again!",
+                LocaleKeys.loginMessage.tr(),
                 style: TextStyle(
                   fontSize: 30.sp,
                   color: Colors.black,
@@ -62,7 +62,7 @@ class _LoginScreenState extends State<LoginScreen> {
               SizedBox(height: 15.h),
 
               CustomTextFormField(
-                hintText: "Enter your email",
+                hintText: LocaleKeys.eneterEmail.tr(),
                 isPassword: false,
                 controller: emailController,
               ),
@@ -70,7 +70,7 @@ class _LoginScreenState extends State<LoginScreen> {
               SizedBox(height: 10.h),
 
               CustomTextFormField(
-                hintText: "Enter your Password",
+                hintText: LocaleKeys.enterPassord.tr(),
                 controller: passwordController,
                 isPassword: true,
               ),
@@ -88,7 +88,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       );
                     },
                     child: Text(
-                      "Forgot Password?",
+                      LocaleKeys.forgetPassord.tr(),
                       style: TextStyle(fontSize: 14.sp, color: Colors.grey),
                     ),
                   ),
@@ -129,14 +129,14 @@ class _LoginScreenState extends State<LoginScreen> {
 
               SiginChooseContainer(
                 iconSign: "assets/icons/google.svg",
-                text: "Sign in with Google",
+                text: LocaleKeys.signGoogle.tr(),
               ),
 
               SizedBox(height: 15.h),
 
               SiginChooseContainer(
                 iconSign: "assets/icons/apple.svg",
-                text: "Sign in with Apple",
+                text: LocaleKeys.signApple.tr(),
               ),
 
               SizedBox(height: 80.h),
@@ -148,14 +148,14 @@ class _LoginScreenState extends State<LoginScreen> {
                     TextSpan(
                       children: [
                         TextSpan(
-                          text: "Don't have an account?",
+                          text: LocaleKeys.dontnotHaveAccount.tr(),
                           style: TextStyle(
                             fontSize: 14.sp,
                             color: Colors.black,
                           ),
                         ),
                         TextSpan(
-                          text: " Register Now",
+                          text: LocaleKeys.registerNow.tr(),
                           style: TextStyle(
                             fontSize: 14.sp,
                             color: AppColors.primaryColor,

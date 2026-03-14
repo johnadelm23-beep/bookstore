@@ -16,7 +16,6 @@ class SiginChooseContainer extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 16.h),
       width: double.infinity,
-
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
         border: Border.all(color: Colors.grey),
