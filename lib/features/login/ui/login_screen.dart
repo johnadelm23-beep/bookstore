@@ -2,7 +2,7 @@ import 'package:book_stroe/core/theme/app_colors.dart';
 import 'package:book_stroe/core/widgets/app_button.dart';
 import 'package:book_stroe/core/widgets/custom_app_bar.dart';
 import 'package:book_stroe/core/widgets/custom_text_form_field.dart';
-import 'package:book_stroe/features/bottom_nav_bar/ui/botoom_nav_bar_screen.dart';
+import 'package:book_stroe/features/bottom_nav_bar/ui/bottom_nav_bar_screen.dart';
 import 'package:book_stroe/features/forgot/ui/forgot_screen.dart';
 import 'package:book_stroe/features/login/ui/widgets/sigin_choose_container.dart';
 import 'package:book_stroe/features/register/cubit/auth_cubit.dart';
@@ -101,29 +101,43 @@ class _LoginScreenState extends State<LoginScreen> {
               SizedBox(height: 30.h),
 
               BlocListener<AuthCubit, AuthState>(
-  listener: (context, state) {
-    if(state is AuthLoadingState){
-      showDialog(context: context, builder: (c)=>Center(child: CircularProgressIndicator(color: AppColors.primaryColor,)));
-    }else if(state is AuthErrorState){
-      Navigator.pop(context);
-      showDialog(context: context, builder:(c)=>AlertDialog(
-        title: Text('error'),
-        content: Text('Something is wrong please try again'),
-      ));
-
-    }else if(state is AuthSuccessState){
-
-      Navigator.push(context, MaterialPageRoute(builder: (c)=>BotoomNavBarScreen()));
-    }
-    // TODO: implement listener
-  },
-  child: AppButton(
-                text: LocaleKeys.login.tr(),
-                onTap: ()  {
-                  context.read<AuthCubit>().login(email: emailController.text, password: passwordController.text);
+                listener: (context, state) {
+                  if (state is AuthLoadingState) {
+                    showDialog(
+                      context: context,
+                      builder: (c) => Center(
+                        child: CircularProgressIndicator(
+                          color: AppColors.primaryColor,
+                        ),
+                      ),
+                    );
+                  } else if (state is AuthErrorState) {
+                    Navigator.pop(context);
+                    showDialog(
+                      context: context,
+                      builder: (c) => AlertDialog(
+                        title: Text('error'),
+                        content: Text('Something is wrong please try again'),
+                      ),
+                    );
+                  } else if (state is AuthSuccessState) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (c) => BottomNavBarScreen()),
+                    );
+                  }
+                  // TODO: implement listener
                 },
+                child: AppButton(
+                  text: LocaleKeys.login.tr(),
+                  onTap: () {
+                    context.read<AuthCubit>().login(
+                      email: emailController.text,
+                      password: passwordController.text,
+                    );
+                  },
+                ),
               ),
-),
 
               SizedBox(height: 44.h),
 
@@ -195,6 +209,4 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
-
-  
 }

@@ -27,6 +27,18 @@ class $AssetsFontsGen {
 class $AssetsIconsGen {
   const $AssetsIconsGen();
 
+  /// File path: assets/icons/BookMark.svg
+  String get bookMark => 'assets/icons/BookMark.svg';
+
+  /// File path: assets/icons/CartIcon.svg
+  String get cartIcon => 'assets/icons/CartIcon.svg';
+
+  /// File path: assets/icons/HomeIcom.svg
+  String get homeIcom => 'assets/icons/HomeIcom.svg';
+
+  /// File path: assets/icons/Profile.svg
+  String get profile => 'assets/icons/Profile.svg';
+
   /// File path: assets/icons/apple.svg
   String get apple => 'assets/icons/apple.svg';
 
@@ -34,7 +46,14 @@ class $AssetsIconsGen {
   String get google => 'assets/icons/google.svg';
 
   /// List of all assets
-  List<String> get values => [apple, google];
+  List<String> get values => [
+    bookMark,
+    cartIcon,
+    homeIcom,
+    profile,
+    apple,
+    google,
+  ];
 }
 
 class $AssetsImagesGen {

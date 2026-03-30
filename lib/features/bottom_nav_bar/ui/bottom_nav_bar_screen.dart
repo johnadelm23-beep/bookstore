@@ -1,0 +1,104 @@
+import 'package:book_stroe/core/theme/app_colors.dart';
+import 'package:book_stroe/features/bookmark/ui/bookmark_screen.dart';
+import 'package:book_stroe/features/cart/ui/cart_screen.dart';
+import 'package:book_stroe/features/home/ui/home_screen.dart';
+import 'package:book_stroe/features/profile/ui/profile_screen.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+
+class BottomNavBarScreen extends StatefulWidget {
+  const BottomNavBarScreen({super.key});
+
+  @override
+  State<BottomNavBarScreen> createState() => _BottomNavBarScreenState();
+}
+
+class _BottomNavBarScreenState extends State<BottomNavBarScreen> {
+  int activeIndex = 0;
+
+  final List<Widget> screens = [
+    HomeScreen(),
+    BookmarkScreen(),
+    CartScreen(),
+    ProfileScreen(),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16.w),
+          child: screens[activeIndex],
+        ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: activeIndex,
+        onTap: (index) {
+          setState(() {
+            activeIndex = index;
+          });
+        },
+
+        type: BottomNavigationBarType.fixed, // مهم جدا
+        selectedItemColor: AppColors.primaryColor,
+        unselectedItemColor: Colors.grey,
+
+        showSelectedLabels: true,
+        showUnselectedLabels: false,
+
+        items: [
+          BottomNavigationBarItem(
+            icon: SvgPicture.asset(
+              'assets/icons/HomeIcom.svg',
+              width: 24,
+              height: 24,
+              colorFilter: ColorFilter.mode(
+                activeIndex == 0 ? AppColors.primaryColor : Colors.grey,
+                BlendMode.srcIn,
+              ),
+            ),
+            label: "Home",
+          ),
+          BottomNavigationBarItem(
+            icon: SvgPicture.asset(
+              'assets/icons/BookMark.svg',
+              width: 24,
+              height: 24,
+              colorFilter: ColorFilter.mode(
+                activeIndex == 1 ? AppColors.primaryColor : Colors.grey,
+                BlendMode.srcIn,
+              ),
+            ),
+            label: "BookMark",
+          ),
+          BottomNavigationBarItem(
+            icon: SvgPicture.asset(
+              'assets/icons/CartIcon.svg',
+              width: 24,
+              height: 24,
+              colorFilter: ColorFilter.mode(
+                activeIndex == 2 ? AppColors.primaryColor : Colors.grey,
+                BlendMode.srcIn,
+              ),
+            ),
+            label: "Cart",
+          ),
+          BottomNavigationBarItem(
+            icon: SvgPicture.asset(
+              'assets/icons/Profile.svg',
+              width: 24,
+              height: 24,
+              colorFilter: ColorFilter.mode(
+                activeIndex == 3 ? AppColors.primaryColor : Colors.grey,
+                BlendMode.srcIn,
+              ),
+            ),
+            label: "Profile",
+          ),
+        ],
+      ),
+    );
+  }
+}

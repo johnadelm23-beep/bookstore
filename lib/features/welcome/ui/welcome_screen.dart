@@ -33,7 +33,6 @@ class WelcomeScreen extends StatelessWidget {
                 children: [
                   IconButton(
                     onPressed: () {
-                      // تغيير اللغة
                       if (context.locale.languageCode == "ar") {
                         context.setLocale(Locale("en"));
                       } else {
@@ -47,7 +46,7 @@ class WelcomeScreen extends StatelessWidget {
               SizedBox(height: 105.h),
               Assets.images.splash.bookialogo.image(),
               SizedBox(height: 28.h),
-              Flexible(
+              Expanded(
                 child: Text(
                   LocaleKeys.welcomeMessage.tr(),
                   style: TextStyle(
@@ -57,20 +56,22 @@ class WelcomeScreen extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
               ),
-              SizedBox(height: 20.h),
+              SizedBox(height: 30.h),
               AppButton(
                 text: LocaleKeys.login.tr(),
                 onTap: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => BlocProvider(create: (context) => AuthCubit(), child: LoginScreen(),
-),
+                      builder: (context) => BlocProvider(
+                        create: (context) => AuthCubit(),
+                        child: LoginScreen(),
+                      ),
                     ),
                   );
                 },
               ),
-              SizedBox(height: 9.h),
+              SizedBox(height: 10.h),
               AppButton(
                 text: LocaleKeys.register.tr(),
                 backGround: Colors.white,

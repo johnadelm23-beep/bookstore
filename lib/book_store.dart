@@ -1,5 +1,5 @@
 import 'package:book_stroe/core/helper/app_constants.dart';
-import 'package:book_stroe/features/bottom_nav_bar/ui/botoom_nav_bar_screen.dart';
+import 'package:book_stroe/features/bottom_nav_bar/ui/bottom_nav_bar_screen.dart';
 import 'package:book_stroe/features/welcome/ui/welcome_screen.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -24,11 +24,12 @@ class BookStore extends StatelessWidget {
       ),
     );
   }
-  Widget startScreen(){
-    if(AppConstants.token==null){
+
+  Widget startScreen() {
+    if (AppConstants.token == null) {
       return WelcomeScreen();
-    }else{
-      return BotoomNavBarScreen();
+    } else {
+      return BottomNavBarScreen();
     }
   }
 }
