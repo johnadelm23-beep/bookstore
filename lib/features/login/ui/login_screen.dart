@@ -2,12 +2,15 @@ import 'package:book_stroe/core/theme/app_colors.dart';
 import 'package:book_stroe/core/widgets/app_button.dart';
 import 'package:book_stroe/core/widgets/custom_app_bar.dart';
 import 'package:book_stroe/core/widgets/custom_text_form_field.dart';
+import 'package:book_stroe/features/bottom_nav_bar/ui/botoom_nav_bar_screen.dart';
 import 'package:book_stroe/features/forgot/ui/forgot_screen.dart';
 import 'package:book_stroe/features/login/ui/widgets/sigin_choose_container.dart';
+import 'package:book_stroe/features/register/cubit/auth_cubit.dart';
 import 'package:book_stroe/generated/locale_keys.g.dart';
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:dio/dio.dart';
 
@@ -97,12 +100,30 @@ class _LoginScreenState extends State<LoginScreen> {
 
               SizedBox(height: 30.h),
 
-              AppButton(
+              BlocListener<AuthCubit, AuthState>(
+  listener: (context, state) {
+    if(state is AuthLoadingState){
+      showDialog(context: context, builder: (c)=>Center(child: CircularProgressIndicator(color: AppColors.primaryColor,)));
+    }else if(state is AuthErrorState){
+      Navigator.pop(context);
+      showDialog(context: context, builder:(c)=>AlertDialog(
+        title: Text('error'),
+        content: Text('Something is wrong please try again'),
+      ));
+
+    }else if(state is AuthSuccessState){
+
+      Navigator.push(context, MaterialPageRoute(builder: (c)=>BotoomNavBarScreen()));
+    }
+    // TODO: implement listener
+  },
+  child: AppButton(
                 text: LocaleKeys.login.tr(),
-                onTap: () async {
-                  await login();
+                onTap: ()  {
+                  context.read<AuthCubit>().login(email: emailController.text, password: passwordController.text);
                 },
               ),
+),
 
               SizedBox(height: 44.h),
 
@@ -175,15 +196,5 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  login() async {
-    Dio dio = Dio();
-    final response = await dio.post(
-      'https://codingarabic.online/api/login',
-      data: {
-        "email": emailController.text,
-        "password": passwordController.text,
-      },
-    );
-    print(response.statusCode.toString());
-  }
+  
 }
