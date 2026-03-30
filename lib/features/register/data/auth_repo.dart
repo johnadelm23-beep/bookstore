@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthRepo{
  static Dio dio=Dio();
@@ -11,6 +12,7 @@ static Future<bool> login({required String email ,required String password})asyn
       }
       );
       if(response.statusCode==200){
+        saveUserToken(token:response.data['data']['token']);
         return true;
       }else{
         return false;
@@ -30,6 +32,7 @@ static Future<bool> login({required String email ,required String password})asyn
            'password_confirmation':confirmPassword,
          }
      );if(response.statusCode==201){
+
        return true;
      }else{
        return false;
@@ -38,5 +41,11 @@ static Future<bool> login({required String email ,required String password})asyn
      return false;
      print(e);
    }
+   }
+  static Future<void>  saveUserToken({required String token})async{
+        final SharedPreferences prefs=await SharedPreferences.getInstance();
+        prefs.setString('token', token);
+        print('=========================');
+        print('token saved successfully');
    }
 }

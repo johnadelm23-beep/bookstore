@@ -74,7 +74,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
             listener: (context, state) {
               if(state is AuthLoadingState){
                 showDialog(context: context, builder: (c)=>Center(child: CircularProgressIndicator(color: AppColors.primaryColor,)));
-
               }else if(state is AuthErrorState){
                 Navigator.pop(context);
                 showDialog(context: context, builder: (c)=>AlertDialog(
