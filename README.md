@@ -7,10 +7,10 @@ This project includes login, registration, and a welcome screen with multi-langu
 
 ## Screenshots
 
-### Login Status
+### Register Status
 ![Login Status](https://github.com/johnadelm23-beep/bookstore/blob/main/bookiastore.jpeg)
 
-### Register Status
+### Login Status
 ![Register Status](https://github.com/johnadelm23-beep/bookstore/blob/f2e834eadc4f61190a47d78099b403030e4929ed/bookiastore2.jpeg)
 
 ---
