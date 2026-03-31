@@ -12,10 +12,10 @@ This project is a starting point for a Flutter application. You can use it to ex
 
 ## Screenshots
 
-### Login Status
+### Register Status
 ![Login Status](https://github.com/johnadelm23-beep/bookstore/blob/53bd9cb8362bd56da0447a3d309bd301b330f0b4/bookiastore.jpeg)
 
-### Register Status
+### Login Status
 ![Register Status](https://github.com/johnadelm23-beep/bookstore/blob/f2e834eadc4f61190a47d78099b403030e4929ed/bookiastore2.jpeg)
 
 ---
