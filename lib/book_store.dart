@@ -1,4 +1,4 @@
-import 'package:book_stroe/core/helper/app_constants.dart';
+import 'package:book_stroe/core/helper/api_constants.dart';
 import 'package:book_stroe/features/bottom_nav_bar/ui/bottom_nav_bar_screen.dart';
 import 'package:book_stroe/features/welcome/ui/welcome_screen.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -15,7 +15,7 @@ class BookStore extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       child: MaterialApp(
-        theme: ThemeData(fontFamily: "DM"),
+        theme: ThemeData(fontFamily: 'DM'),
         debugShowCheckedModeBanner: false,
         localizationsDelegates: context.localizationDelegates,
         supportedLocales: context.supportedLocales,
@@ -26,7 +26,7 @@ class BookStore extends StatelessWidget {
   }
 
   Widget startScreen() {
-    if (AppConstants.token == null) {
+    if (ApiConstants.token == null) {
       return WelcomeScreen();
     } else {
       return BottomNavBarScreen();
