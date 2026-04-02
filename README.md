@@ -1,37 +1,12 @@
 # book_store
 
 A Flutter project for managing books and bookstore features.
-![WhatsApp Image 2026-03-31 at 2 53 03 AM](https://github.com/user-attachments/assets/5331e21d-e4da-4a93-b196-42bd20d0dd9a)
-
-https://github.com/user-attachments/assets/c55e5824-4bfe-49c7-9a2f-3cc13a1d1fce
-
-
-
----
 
 ## Getting Started
 
 This project is a starting point for a Flutter application. You can use it to explore Flutter development and build a bookstore app.
 
 ---
-
-## Screenshots
-
-### Register Status
-![Login Status](https://github.com/johnadelm23-beep/bookstore/blob/53bd9cb8362bd56da0447a3d309bd301b330f0b4/bookiastore.jpeg)
-
-### Login Status
-![Register Status](https://github.com/johnadelm23-beep/bookstore/blob/f2e834eadc4f61190a47d78099b403030e4929ed/bookiastore2.jpeg)
-
----
-
-## Demo GIFs
-
-### Login Demo
-![Login Demo](assets/demo/login_demo.gif)
-
-### Register Demo
-![Register Demo](assets/demo/register_demo.gif)
 
 ---
 
