@@ -2,6 +2,7 @@ import 'package:book_stroe/core/theme/app_colors.dart';
 import 'package:book_stroe/core/widgets/app_button.dart';
 import 'package:book_stroe/core/widgets/custom_app_bar.dart';
 import 'package:book_stroe/core/widgets/custom_text_form_field.dart';
+import 'package:book_stroe/features/bottom_nav_bar/ui/bottom_nav_bar_screen.dart';
 import 'package:book_stroe/features/register/cubit/auth_cubit.dart';
 import 'package:book_stroe/generated/locale_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -17,17 +18,19 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  var userNameController = TextEditingController();
-  var emailController = TextEditingController();
-  var passwordControoler = TextEditingController();
-  var confirmPassordControoler = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+  final TextEditingController userNameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
 
   @override
   void dispose() {
     userNameController.dispose();
-    passwordControoler.dispose();
     emailController.dispose();
-    confirmPassordControoler.dispose();
+    passwordController.dispose();
+    confirmPasswordController.dispose();
     super.dispose();
   }
 
@@ -38,83 +41,105 @@ class _RegisterScreenState extends State<RegisterScreen> {
       body: ListView(
         padding: EdgeInsets.only(left: 22.w, right: 22.w, top: 68.h),
         children: [
-          CustomAppBar(),
+          const CustomAppBar(),
           SizedBox(height: 15.h),
           Text(
             LocaleKeys.registerMessage.tr(),
-            style: TextStyle(fontSize: 30.sp, fontWeight: .bold),
+            style: TextStyle(fontSize: 30.sp, fontWeight: FontWeight.bold),
           ),
           SizedBox(height: 15.h),
-          CustomTextFormField(
-            hintText: LocaleKeys.userName.tr(),
-            isPassword: false,
-            controller: userNameController,
-          ),
-          SizedBox(height: 11.h),
-          CustomTextFormField(
-            hintText: LocaleKeys.email.tr(),
-            isPassword: false,
-            controller: emailController,
-          ),
-          SizedBox(height: 11.h),
-          CustomTextFormField(
-            hintText: LocaleKeys.password.tr(),
-            isPassword: true,
-            controller: passwordControoler,
-          ),
-          SizedBox(height: 11.h),
-          CustomTextFormField(
-            hintText: LocaleKeys.confirm.tr(),
-            isPassword: true,
-            controller: confirmPassordControoler,
+          Form(
+            key: _formKey,
+            child: Column(
+              children: [
+                CustomTextFormField(
+                  hintText: LocaleKeys.userName.tr(),
+                  isPassword: false,
+                  controller: userNameController,
+                  validator: (value) => value == null || value.isEmpty
+                      ? 'Please enter your name'
+                      : null,
+                ),
+                SizedBox(height: 11.h),
+                CustomTextFormField(
+                  hintText: LocaleKeys.email.tr(),
+                  isPassword: false,
+                  controller: emailController,
+                  validator: (value) => value == null || !value.contains('@')
+                      ? 'Please enter a valid email'
+                      : null,
+                ),
+                SizedBox(height: 11.h),
+                CustomTextFormField(
+                  hintText: LocaleKeys.password.tr(),
+                  isPassword: true,
+                  controller: passwordController,
+                  validator: (value) => value == null || value.length < 6
+                      ? 'Password must be at least 6 characters'
+                      : null,
+                ),
+                SizedBox(height: 11.h),
+                CustomTextFormField(
+                  hintText: LocaleKeys.confirm.tr(),
+                  isPassword: true,
+                  controller: confirmPasswordController,
+                  validator: (value) => value != passwordController.text
+                      ? 'Passwords do not match'
+                      : null,
+                ),
+              ],
+            ),
           ),
           SizedBox(height: 30.h),
           BlocListener<AuthCubit, AuthState>(
             listener: (context, state) {
               if (state is AuthLoadingState) {
                 showDialog(
+                  barrierDismissible: false,
                   context: context,
-                  builder: (c) => Center(
-                    child: CircularProgressIndicator(
-                      color: AppColors.primaryColor,
-                    ),
-                  ),
+                  builder: (c) =>
+                      const Center(child: CircularProgressIndicator()),
                 );
               } else if (state is AuthErrorState) {
-                Navigator.pop(context);
+                Navigator.pop(context); // Close loading dialog
                 showDialog(
                   context: context,
                   builder: (c) => AlertDialog(
-                    title: Text('Error'),
-                    content: Text('Something is wrong please try again'),
+                    title: const Text(LocaleKeys.errorLabel).tr(),
+                    content: const Text(LocaleKeys.errorMessage).tr(),
+                    actions: [
+                      TextButton(
+                        onPressed: () => Navigator.pop(c),
+                        child: const Text('OK'),
+                      ),
+                    ],
                   ),
                 );
               } else if (state is AuthSuccessState) {
-                Navigator.pop(context);
-                showDialog(
-                  context: context,
-                  builder: (c) => AlertDialog(
-                    title: Text('Success'),
-                    content: Text('Created account successfully!'),
-                  ),
+                Navigator.pop(context); // Close loading dialog
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (c) => const BottomNavBarScreen()),
                 );
               }
             },
             child: AppButton(
               text: LocaleKeys.register.tr(),
-              onTap: () async {
-                context.read<AuthCubit>().register(
-                  name: userNameController.text,
-                  email: emailController.text,
-                  password: passwordControoler.text,
-                  confirmPassword: confirmPassordControoler.text,
-                );
+              onTap: () {
+                if (_formKey.currentState!.validate()) {
+                  context.read<AuthCubit>().register(
+                    name: userNameController.text,
+                    email: emailController.text,
+                    password: passwordController.text,
+                    confirmPassword: confirmPasswordController.text,
+                  );
+                }
               },
             ),
           ),
           SizedBox(height: 220.h),
           Row(
-            mainAxisAlignment: .center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text.rich(
                 TextSpan(

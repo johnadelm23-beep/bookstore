@@ -19,5 +19,7 @@
   "registerLogin": " Login Now",
   "forgetPasswordMessage": "Don't worry! It occurs. Please enter the email address linked with your account.",
   "sendCode": "Send Code",
-  "remember": "Remember Password? "
+  "remember": "Remember Password? ",
+  "errorLabel": "Error",
+  "errorMessage": "Something went wrong, please try again"
 }

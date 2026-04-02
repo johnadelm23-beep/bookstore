@@ -1,6 +1,8 @@
+import 'package:book_stroe/features/welcome/ui/welcome_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeAppBar extends StatelessWidget {
   const HomeAppBar({super.key});
@@ -8,14 +10,27 @@ class HomeAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: .spaceBetween,
       children: [
         Image.asset(
           'assets/images/splash/bookialogo.png',
           width: 100.w,
           height: 100.h,
         ),
+        Spacer(),
         SvgPicture.asset('assets/icons/search-normal.svg'),
+
+        SizedBox(width: 10.w),
+        IconButton(
+          onPressed: () async {
+            var prefs = await SharedPreferences.getInstance();
+            await prefs.remove('token');
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (c) => WelcomeScreen()),
+            );
+          },
+          icon: Icon(Icons.logout),
+        ),
       ],
     );
   }

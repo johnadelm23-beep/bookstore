@@ -45,6 +45,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/google.svg
   String get google => 'assets/icons/google.svg';
 
+  /// File path: assets/icons/search-normal.svg
+  String get searchNormal => 'assets/icons/search-normal.svg';
+
   /// List of all assets
   List<String> get values => [
     bookMark,
@@ -53,6 +56,7 @@ class $AssetsIconsGen {
     profile,
     apple,
     google,
+    searchNormal,
   ];
 }
 

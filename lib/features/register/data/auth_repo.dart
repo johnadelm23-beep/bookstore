@@ -2,7 +2,6 @@ import 'package:book_stroe/core/helper/api_constants.dart';
 import 'package:book_stroe/core/helper/dio_helper.dart';
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 class AuthRepo {
   static Future<bool> login({
     required String email,
@@ -23,7 +22,6 @@ class AuthRepo {
       return false;
     }
   }
-
   static Future<bool> register({
     required String name,
     required String email,
@@ -32,7 +30,7 @@ class AuthRepo {
   }) async {
     try {
       final response = await DioHelper.dio?.post(
-        ApiConstants.regiter,
+        ApiConstants.register,
         data: {
           'name': name,
           'email': email,

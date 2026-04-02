@@ -1,9 +1,11 @@
 import 'package:book_stroe/core/theme/app_colors.dart';
 import 'package:book_stroe/features/bookmark/ui/bookmark_screen.dart';
 import 'package:book_stroe/features/cart/ui/cart_screen.dart';
+import 'package:book_stroe/features/home/cubit/cubit/home_cubit_cubit.dart';
 import 'package:book_stroe/features/home/ui/home_screen.dart';
 import 'package:book_stroe/features/profile/ui/profile_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -18,7 +20,10 @@ class _BottomNavBarScreenState extends State<BottomNavBarScreen> {
   int activeIndex = 0;
 
   final List<Widget> screens = [
-    HomeScreen(),
+    BlocProvider(
+      create: (context) => HomeCubitCubit()..getSlider(),
+      child: HomeScreen(),
+    ),
     BookmarkScreen(),
     CartScreen(),
     ProfileScreen(),
@@ -41,7 +46,7 @@ class _BottomNavBarScreenState extends State<BottomNavBarScreen> {
           });
         },
 
-        type: BottomNavigationBarType.fixed, // مهم جدا
+        type: BottomNavigationBarType.fixed,
         selectedItemColor: AppColors.primaryColor,
         unselectedItemColor: Colors.grey,
 
