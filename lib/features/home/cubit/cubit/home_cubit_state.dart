@@ -13,3 +13,12 @@ final class SliderSuccessState extends HomeCubitState {
 }
 
 final class SliderErrorState extends HomeCubitState {}
+
+final class ProductLoadingStatus extends HomeCubitState {}
+
+final class ProductSuccessStatus extends HomeCubitState {
+  final List<Product> products;
+  ProductSuccessStatus({required this.products});
+}
+
+final class ProductErrorStatus extends HomeCubitState {}

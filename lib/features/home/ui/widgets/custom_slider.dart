@@ -23,7 +23,7 @@ class _CustomSliderState extends State<CustomSlider> {
           borderRadius: BorderRadiusGeometry.circular(12.r),
           child: CarouselSlider(
             options: CarouselOptions(
-              height: 180.0.h,
+              height: 150.0.h,
               autoPlay: true,
               autoPlayInterval: Duration(seconds: 2),
               viewportFraction: 1,
