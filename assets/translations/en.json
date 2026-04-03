@@ -21,5 +21,6 @@
   "sendCode": "Send Code",
   "remember": "Remember Password? ",
   "errorLabel": "Error",
-  "errorMessage": "Something went wrong, please try again"
+  "errorMessage": "Something went wrong, please try again",
+  "booksTitleBestSeller": "Best seller"
 }

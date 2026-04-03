@@ -21,5 +21,6 @@
   "sendCode": "إرسال الرمز",
   "remember": "تتذكر كلمة المرور؟",
   "errorLabel": "خطأ",
-  "errorMessage": "حدث خطأ، حاول مرة أخرى"
+  "errorMessage": "حدث خطأ، حاول مرة أخرى",
+  "booksTitleBestSeller": "الأكثر مبيعاً"
 }

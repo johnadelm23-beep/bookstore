@@ -21,9 +21,7 @@ class _BottomNavBarScreenState extends State<BottomNavBarScreen> {
 
   final List<Widget> screens = [
     BlocProvider(
-      create: (context) => HomeCubitCubit()
-        ..getSlider()
-        ..getProducts,
+      create: (context) => HomeCubitCubit()..getHomeData(),
       child: HomeScreen(),
     ),
     BookmarkScreen(),

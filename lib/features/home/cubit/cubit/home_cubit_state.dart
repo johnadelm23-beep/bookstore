@@ -5,20 +5,12 @@ sealed class HomeCubitState {}
 
 final class HomeCubitInitial extends HomeCubitState {}
 
-final class SliderLoadingState extends HomeCubitState {}
+final class HomeLoadingState extends HomeCubitState {}
 
-final class SliderSuccessState extends HomeCubitState {
+final class HomeSuccessState extends HomeCubitState {
   final List<SliderModel> sliders;
-  SliderSuccessState({required this.sliders});
-}
-
-final class SliderErrorState extends HomeCubitState {}
-
-final class ProductLoadingStatus extends HomeCubitState {}
-
-final class ProductSuccessStatus extends HomeCubitState {
   final List<Product> products;
-  ProductSuccessStatus({required this.products});
+  HomeSuccessState({required this.sliders, required this.products});
 }
 
-final class ProductErrorStatus extends HomeCubitState {}
+final class HomeErrorState extends HomeCubitState {}
