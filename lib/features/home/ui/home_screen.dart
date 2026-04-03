@@ -6,7 +6,6 @@ import 'package:book_stroe/features/home/ui/widgets/home_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -16,67 +15,60 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   @override
-  @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        HomeAppBar(),
-
-        Expanded(
-          child: BlocBuilder<HomeCubitCubit, HomeCubitState>(
-            builder: (context, state) {
-              if (state is HomeLoadingState) {
-                return Center(
-                  child: CircularProgressIndicator(
-                    color: AppColors.primaryColor,
-                  ),
-                );
-              } else if (state is HomeSuccessState) {
-                return Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      // 🔹 Slider
-                      SizedBox(
-                        height: 180.h,
-                        child: CustomSlider(sliders: state.sliders),
+    return Scaffold(
+      body: BlocBuilder<HomeCubitCubit, HomeCubitState>(
+        builder: (context, state) {
+          if (state is HomeLoadingState) {
+            return Center(
+              child: CircularProgressIndicator(color: AppColors.primaryColor),
+            );
+          } else if (state is HomeSuccessState) {
+            return Column(
+              children: [
+                HomeAppBar(),
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            height: 180.h,
+                            child: CustomSlider(sliders: state.sliders),
+                          ),
+                          SizedBox(height: 10),
+                          Text("Best seller", style: TextStyle(fontSize: 25.sp)),
+                          SizedBox(height: 10),
+                          GridView.builder(
+                            shrinkWrap: true,
+                            physics: NeverScrollableScrollPhysics(),
+                            itemCount: state.products.length,
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                              crossAxisSpacing: 10,
+                              mainAxisSpacing: 10,
+                              childAspectRatio: 162 / 281,
+                            ),
+                            itemBuilder: (context, index) {
+                              final product = state.products[index];
+                              return CustomContainerProducts(products: product);
+                            },
+                          ),
+                        ],
                       ),
-
-                      SizedBox(height: 10),
-
-                      // 🔹 Title
-                      Text("Best seller", style: TextStyle(fontSize: 25.sp)),
-
-                      SizedBox(height: 10),
-
-                      // 🔹 Products
-                      Expanded(
-                        child: GridView.builder(
-                          itemCount: state.products.length,
-                          gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 2,
-                                crossAxisSpacing: 10,
-                                mainAxisSpacing: 10,
-                                childAspectRatio: 162 / 281,
-                              ),
-                          itemBuilder: (context, index) {
-                            final product = state.products[index];
-                            return CustomContainerProducts(products: product);
-                          },
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
-                );
-              } else {
-                return Expanded(child: Center(child: Text("Error")));
-              }
-            },
-          ),
-        ),
-      ],
+                ),
+              ],
+            );
+          } else {
+            return Center(child: Text("Error"));
+          }
+        },
+      ),
     );
   }
 }
