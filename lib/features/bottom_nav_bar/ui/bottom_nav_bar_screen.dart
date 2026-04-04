@@ -76,7 +76,9 @@ class _BottomNavBarScreenState extends State<BottomNavBarScreen> {
               width: 24,
               height: 24,
               colorFilter: ColorFilter.mode(
-                activeIndex == 1 ? AppColors.primaryColor : Colors.grey,
+                activeIndex == 1
+                    ? const Color.fromARGB(255, 113, 105, 84)
+                    : Colors.grey,
                 BlendMode.srcIn,
               ),
             ),

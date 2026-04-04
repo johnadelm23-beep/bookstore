@@ -1,4 +1,5 @@
 import 'package:book_stroe/core/widgets/app_button.dart';
+import 'package:book_stroe/core/widgets/custom_translation_button.dart';
 import 'package:book_stroe/features/login/ui/login_screen.dart';
 import 'package:book_stroe/features/register/cubit/auth_cubit.dart';
 import 'package:book_stroe/features/register/ui/register_screen.dart';
@@ -30,18 +31,7 @@ class WelcomeScreen extends StatelessWidget {
               SizedBox(height: 30.h),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  IconButton(
-                    onPressed: () {
-                      if (context.locale.languageCode == "ar") {
-                        context.setLocale(Locale("en"));
-                      } else {
-                        context.setLocale(Locale("ar"));
-                      }
-                    },
-                    icon: Icon(Icons.language),
-                  ),
-                ],
+                children: [CustomTranslationButton()],
               ),
               SizedBox(height: 105.h),
               Assets.images.splash.bookialogo.image(),

@@ -21,6 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: BlocBuilder<HomeCubitCubit, HomeCubitState>(
         builder: (context, state) {
           if (state is HomeLoadingState) {

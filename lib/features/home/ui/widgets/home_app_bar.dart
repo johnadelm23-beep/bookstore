@@ -1,3 +1,4 @@
+import 'package:book_stroe/core/widgets/custom_translation_button.dart';
 import 'package:book_stroe/features/welcome/ui/welcome_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -19,7 +20,6 @@ class HomeAppBar extends StatelessWidget {
         Spacer(),
         SvgPicture.asset('assets/icons/search-normal.svg'),
 
-        SizedBox(width: 10.w),
         IconButton(
           onPressed: () async {
             var prefs = await SharedPreferences.getInstance();
