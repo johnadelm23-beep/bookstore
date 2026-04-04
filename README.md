@@ -1,40 +1,31 @@
-# book_store
+# Bookia - Book Store App
 
-A Flutter project for managing books and bookstore features.
-
-## Screen shots :
-
-
-https://github.com/user-attachments/assets/e8b43420-7897-41f9-b905-aac79a3a33c9
-
-
-------------------------------
-<img width="1550" height="946" alt="Screenshot 2026-04-03 011606" src="https://github.com/user-attachments/assets/bc61ace9-a6ef-46b4-bd91-ecaebcc20fa9" />
-------------------------------
-## Getting Started
-
-This project is a starting point for a Flutter application. You can use it to explore Flutter development and build a bookstore app.
+A Flutter project for managing books and bookstore features. This app allows users to browse books, view featured promotions, and explore best sellers.
 
 ---
 
----
+## 📸 Screenshots
 
-## Status Codes
 
-- **Login:** Returns `200 OK` on successful login, error codes on failure.  
-- **Register:** Returns `201 Created` on successful registration, error codes on failure.  
+https://github.com/user-attachments/assets/447fe6c3-e2eb-44a0-8d20-9d2cf2767004
 
----
-
-## Resources
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-- [Flutter Documentation](https://docs.flutter.dev/)
 
 ---
 
-## Assets
+## 🚀 Getting Started
 
-- [Asset 1](https://github.com/user-attachments/assets/f680ad22-2e6c-4a0a-b868-3cd7d5e7f2ae)  
-- [Asset 2](https://github.com/user-attachments/assets/5f4375e0-9600-4f70-be4e-83a80a6656a4)
+This project is a starting point for a Flutter application. You can use it to explore Flutter development and build a complete bookstore app.
+
+### Prerequisites
+
+- [Flutter SDK](https://docs.flutter.dev/get-started/install)
+- A code editor (VS Code, Android Studio, etc.)
+- Device or emulator to run the app
+
+### Installation
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/your-username/book_store.git
+cd book_store
