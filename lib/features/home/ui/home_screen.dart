@@ -3,9 +3,13 @@ import 'package:book_stroe/features/home/cubit/cubit/home_cubit_cubit.dart';
 import 'package:book_stroe/features/home/ui/widgets/custom_container_products.dart';
 import 'package:book_stroe/features/home/ui/widgets/custom_slider.dart';
 import 'package:book_stroe/features/home/ui/widgets/home_app_bar.dart';
+import 'package:book_stroe/generated/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -39,7 +43,10 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: CustomSlider(sliders: state.sliders),
                           ),
                           SizedBox(height: 10),
-                          Text("Best seller", style: TextStyle(fontSize: 25.sp)),
+                          Text(
+                            LocaleKeys.booksTitleBestSeller,
+                            style: TextStyle(fontSize: 25.sp),
+                          ).tr(),
                           SizedBox(height: 10),
                           GridView.builder(
                             shrinkWrap: true,
@@ -47,11 +54,11 @@ class _HomeScreenState extends State<HomeScreen> {
                             itemCount: state.products.length,
                             gridDelegate:
                                 SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2,
-                              crossAxisSpacing: 10,
-                              mainAxisSpacing: 10,
-                              childAspectRatio: 162 / 281,
-                            ),
+                                  crossAxisCount: 2,
+                                  crossAxisSpacing: 10,
+                                  mainAxisSpacing: 10,
+                                  childAspectRatio: 162 / 281,
+                                ),
                             itemBuilder: (context, index) {
                               final product = state.products[index];
                               return CustomContainerProducts(products: product);
@@ -65,7 +72,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             );
           } else {
-            return Center(child: Text("Error"));
+            return Center(child: Text(LocaleKeys.errorLabel).tr());
           }
         },
       ),

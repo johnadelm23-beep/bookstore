@@ -22,5 +22,9 @@
   "remember": "Remember Password? ",
   "errorLabel": "Error",
   "errorMessage": "Something went wrong, please try again",
-  "booksTitleBestSeller": "Best seller"
+  "booksTitleBestSeller": "Best seller",
+  "Home": "Home",
+  "BookMark": "BookMark",
+  "Profile": "Profile",
+  "Cart": "Cart"
 }

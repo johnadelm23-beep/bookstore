@@ -22,5 +22,9 @@
   "remember": "تتذكر كلمة المرور؟",
   "errorLabel": "خطأ",
   "errorMessage": "حدث خطأ، حاول مرة أخرى",
-  "booksTitleBestSeller": "الأكثر مبيعاً"
+  "booksTitleBestSeller": "الأكثر مبيعاً",
+  "Home": "الرئيسية",
+  "BookMark": "المفضلة",
+  "Profile": "الملف الشخصي",
+  "Cart": "سلة المشتريات"
 }

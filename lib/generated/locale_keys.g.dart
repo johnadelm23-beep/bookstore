@@ -2,7 +2,7 @@
 
 // ignore_for_file: constant_identifier_names
 
-abstract class  LocaleKeys {
+abstract class LocaleKeys {
   static const login = 'login';
   static const welcomeMessage = 'welcomeMessage';
   static const register = 'register';
@@ -26,5 +26,10 @@ abstract class  LocaleKeys {
   static const remember = 'remember';
   static const errorLabel = 'errorLabel';
   static const errorMessage = 'errorMessage';
+  static const booksTitleBestSeller = 'booksTitleBestSeller';
+  static const Home = 'Home';
 
+  static const BookMark = 'BookMark';
+  static const Profile = 'Profile';
+  static const Cart = 'Cart';
 }
