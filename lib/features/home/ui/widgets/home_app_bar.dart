@@ -1,4 +1,4 @@
-import 'package:book_stroe/core/widgets/custom_translation_button.dart';
+import 'package:book_stroe/features/search/ui/searc_sreen.dart';
 import 'package:book_stroe/features/welcome/ui/welcome_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -14,11 +14,19 @@ class HomeAppBar extends StatelessWidget {
       children: [
         Image.asset(
           'assets/images/splash/bookialogo.png',
-          width: 100.w,
-          height: 100.h,
+          width: 80.w,
+          height: 80.h,
         ),
         Spacer(),
-        SvgPicture.asset('assets/icons/search-normal.svg'),
+        InkWell(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (c) => SearchSreen()),
+            );
+          },
+          child: SvgPicture.asset('assets/icons/search-normal.svg'),
+        ),
 
         IconButton(
           onPressed: () async {

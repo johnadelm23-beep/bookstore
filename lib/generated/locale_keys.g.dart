@@ -32,5 +32,7 @@ abstract class  LocaleKeys {
   static const Profile = 'Profile';
   static const Cart = 'Cart';
   static const Buy = 'Buy';
+  static const priceProduct = 'priceProduct';
+  static const searchHint = 'searchHint';
 
 }

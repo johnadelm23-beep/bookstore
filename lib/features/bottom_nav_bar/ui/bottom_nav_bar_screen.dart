@@ -43,6 +43,7 @@ class _BottomNavBarScreenState extends State<BottomNavBarScreen> {
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.white,
         currentIndex: activeIndex,
         onTap: (index) {
           setState(() {

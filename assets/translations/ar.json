@@ -27,5 +27,7 @@
   "BookMark": "المفضلة",
   "Profile": "الملف الشخصي",
   "Cart": "سلة المشتريات",
-  "Buy": "شراء"
+  "Buy": "شراء",
+  "priceProduct": "{price} د.أ",
+  "searchHint": "ابحث عن كتاب..."
 }
