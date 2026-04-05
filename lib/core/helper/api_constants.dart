@@ -5,4 +5,5 @@ class ApiConstants {
   static const String login = 'login';
   static const String slider = 'sliders';
   static const String products = "products";
+  static const String search ='products-search';
 }

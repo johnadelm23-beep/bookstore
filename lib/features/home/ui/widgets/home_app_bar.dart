@@ -1,6 +1,9 @@
-import 'package:book_stroe/features/search/ui/searc_sreen.dart';
+import 'package:book_stroe/features/search/cubit/cubit/search_cubit.dart';
+import 'package:book_stroe/features/search/data/search_repo.dart';
+import 'package:book_stroe/features/search/ui/search_screen.dart';
 import 'package:book_stroe/features/welcome/ui/welcome_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -22,7 +25,12 @@ class HomeAppBar extends StatelessWidget {
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (c) => SearchSreen()),
+              MaterialPageRoute(
+                builder: (c) => BlocProvider(
+                  create: (context) => SearchCubit(SearchRepo()),
+                  child: SearchScreen(),
+                ),
+              ),
             );
           },
           child: SvgPicture.asset('assets/icons/search-normal.svg'),
