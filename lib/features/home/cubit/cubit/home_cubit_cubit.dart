@@ -1,4 +1,6 @@
 import 'package:bloc/bloc.dart';
+import 'package:book_stroe/features/bookmark/data/bookmark_repo.dart';
+import 'package:book_stroe/features/cart/data/cart_repo.dart';
 import 'package:book_stroe/features/home/data/model/product_model.dart';
 import 'package:book_stroe/features/home/data/model/slider_model.dart';
 import 'package:book_stroe/features/home/data/repo/home_repo.dart';
@@ -22,6 +24,38 @@ class HomeCubitCubit extends Cubit<HomeCubitState> {
       );
     } else {
       emit(HomeErrorState());
+    }
+  }
+
+  Future<void> addToCart(int productId) async {
+    print('loading.................');
+    emit(AddToCartLoadingState());
+    final response = await CartRepo.addToCart(productId: productId);
+    if (response) {
+      print('success...............................');
+      emit(AddToCartSuccessState());
+    } else {
+      emit(AddToCartErrorState());
+    }
+  }
+
+  Future<void> addToFavorite({required int bookId}) async {
+    emit(BookMarkLoadingSate());
+    final response = await BookMarkRepo.addToFavourite(bookId: bookId);
+    if (response) {
+      emit(BookMarkSuccessState(isAdded: true));
+    } else {
+      emit(BookMarkErrorState());
+    }
+  }
+
+  Future<void> removeFroFavorite({required int bookId}) async {
+    emit(BookMarkLoadingSate());
+    final response = await BookMarkRepo.removeFromFavorite(bookId: bookId);
+    if (response) {
+      emit(BookMarkSuccessState(isAdded: false));
+    } else {
+      emit(BookMarkErrorState());
     }
   }
 }

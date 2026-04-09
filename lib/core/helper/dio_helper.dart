@@ -6,7 +6,12 @@ import 'package:dio/dio.dart';
 class DioHelper {
   static Dio? dio;
   static void initDio() {
-    dio = Dio(BaseOptions(baseUrl: ApiConstants.baseUrl));
+    dio = Dio(
+      BaseOptions(
+        baseUrl: ApiConstants.baseUrl,
+        headers: {"Authorization": "Bearer ${ApiConstants.token}"},
+      ),
+    );
     dio?.interceptors.add(
       PrettyDioLogger(
         requestHeader: true,

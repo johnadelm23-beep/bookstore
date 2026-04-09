@@ -9,8 +9,9 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
   final SharedPreferences prefs = await SharedPreferences.getInstance();
-  DioHelper.initDio();
   ApiConstants.token = prefs.getString('token');
+  DioHelper.initDio();
+
   runApp(
     EasyLocalization(
       supportedLocales: [Locale('en'), Locale('ar')],

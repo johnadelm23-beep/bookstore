@@ -14,3 +14,18 @@ final class HomeSuccessState extends HomeCubitState {
 }
 
 final class HomeErrorState extends HomeCubitState {}
+
+final class AddToCartSuccessState extends HomeCubitState {}
+
+final class AddToCartErrorState extends HomeCubitState {}
+
+final class AddToCartLoadingState extends HomeLoadingState {}
+
+final class BookMarkLoadingSate extends HomeLoadingState {}
+
+final class BookMarkSuccessState extends HomeLoadingState {
+  final bool isAdded;
+  BookMarkSuccessState({required this.isAdded});
+}
+
+final class BookMarkErrorState extends HomeLoadingState {}

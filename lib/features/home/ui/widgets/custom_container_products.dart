@@ -14,9 +14,11 @@ class CustomContainerProducts extends StatelessWidget {
     super.key,
     required this.products,
     this.backGroundColor,
+    this.onPressed,
   });
   final Product? products;
   final Color? backGroundColor;
+  final void Function()? onPressed;
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -39,48 +41,89 @@ class CustomContainerProducts extends StatelessWidget {
           borderRadius: BorderRadius.circular(12.r),
           color: backGroundColor ?? AppColors.backGroundContainerItem,
         ),
-        child: Column(
-          crossAxisAlignment: .start,
-          children: [
-            ClipRRect(
-              borderRadius: BorderRadiusGeometry.circular(12.r),
-              child: CustomNetworkImage(
-                imageUrl: products?.image ?? "",
-                width: 140.w,
-                hight: 175.28.h,
-              ),
-              /*
-                 width: 140.w,
-                height: 175.28.h, */
-            ),
-            Expanded(
-              child: Text(
-                products?.name ?? "Test Test",
-                style: TextStyle(fontSize: 18.sp),
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
-            ),
-            Row(
-              children: [
-                Expanded(child: Text("${products?.price ?? ""} \$")),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.black,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.r),
-                    ),
-                    minimumSize: Size(72.23.w, 27.9.h),
-                  ),
-                  onPressed: () {},
-                  child: Text(
-                    LocaleKeys.Buy,
-                    style: TextStyle(fontSize: 20.sp, color: Colors.white),
-                  ).tr(),
+        child: Padding(
+          padding: EdgeInsetsGeometry.only(bottom: 10.h),
+          child: Column(
+            crossAxisAlignment: .start,
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadiusGeometry.circular(12.r),
+                child: CustomNetworkImage(
+                  imageUrl: products?.image ?? "",
+                  width: 140.w,
+                  hight: 175.28.h,
                 ),
-              ],
-            ),
-          ],
+                /*
+                   width: 140.w,
+                  height: 175.28.h, */
+              ),
+              Expanded(
+                child: Text(
+                  products?.name ?? "Test Test",
+                  style: TextStyle(fontSize: 18.sp),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+              Row(
+                children: [
+                  Expanded(child: Text("${products?.price ?? ""} \$")),
+
+                  BlocListener<HomeCubitCubit, HomeCubitState>(
+                    listener: (context, state) {
+                      if (state is AddToCartLoadingState) {
+                        showDialog(
+                          context: context,
+                          builder: (c) => Center(
+                            child: CircularProgressIndicator(
+                              color: AppColors.primaryColor,
+                            ),
+                          ),
+                        );
+                      } else if (state is AddToCartSuccessState) {
+                        Navigator.pop(context);
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text('Added to cart successfully')),
+                        );
+                      } else if (state is AddToCartLoadingState) {
+                        Navigator.pop(context);
+                        ScaffoldMessenger.of(
+                          context,
+                        ).showSnackBar(SnackBar(content: Text('Failed')));
+                      }
+                      // TODO: implement listener
+                    },
+                    child: InkWell(
+                      onTap: () {
+                        context.read<HomeCubitCubit>().addToCart(
+                          products?.id ?? 0,
+                        );
+                      },
+                      child: Container(
+                        padding: EdgeInsets.symmetric(
+                          vertical: 5.w,
+                          horizontal: 15.h,
+                        ),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12),
+                          color: Colors.black,
+                        ),
+                        child: Center(
+                          child: Text(
+                            LocaleKeys.Buy,
+                            style: TextStyle(
+                              fontSize: 20.sp,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

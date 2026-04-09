@@ -96,7 +96,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                             itemBuilder: (context, index) {
                               final product = state.products[index];
-                              return CustomContainerProducts(products: product);
+                              return CustomContainerProducts(
+                                products: product,
+                                onPressed: () {
+                                  context.read<HomeCubitCubit>().addToCart(
+                                    product.id,
+                                  );
+                                },
+                              );
                             },
                           )
                         else

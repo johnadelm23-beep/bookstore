@@ -1,7 +1,6 @@
 import 'package:book_stroe/core/theme/app_colors.dart';
 import 'package:book_stroe/core/widgets/custom_text_form_field.dart';
 import 'package:book_stroe/features/home/ui/widgets/custom_container_products.dart';
-import 'package:book_stroe/features/home/ui/widgets/home_app_bar.dart';
 import 'package:book_stroe/features/search/cubit/cubit/search_cubit.dart';
 import 'package:book_stroe/generated/locale_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart';
