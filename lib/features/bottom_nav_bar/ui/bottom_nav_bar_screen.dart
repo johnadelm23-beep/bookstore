@@ -23,10 +23,7 @@ class _BottomNavBarScreenState extends State<BottomNavBarScreen> {
   int activeIndex = 0;
 
   final List<Widget> screens = [
-    BlocProvider(
-      create: (context) => HomeCubitCubit()..getHomeData(),
-      child: HomeScreen(),
-    ),
+    HomeScreen(),
     BookmarkScreen(),
     CartScreen(),
     ProfileScreen(),

@@ -31,11 +31,11 @@ class _DetailsScreenState extends State<DetailsScreen> {
                 isBookMark: isMark,
                 onTap: () {
                   if (isMark) {
-                    context.read<HomeCubitCubit>().addToFavorite(
+                    context.read<HomeCubitCubit>().addFavorite(
                       bookId: widget.product?.id ?? 0,
                     );
                   } else {
-                    context.read<HomeCubitCubit>().removeFroFavorite(
+                    context.read<HomeCubitCubit>().removeFavorite(
                       bookId: widget.product?.id ?? 0,
                     );
                   }

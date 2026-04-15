@@ -69,52 +69,23 @@ class CustomContainerProducts extends StatelessWidget {
                 children: [
                   Expanded(child: Text("${products?.price ?? ""} \$")),
 
-                  BlocListener<HomeCubitCubit, HomeCubitState>(
-                    listener: (context, state) {
-                      if (state is AddToCartLoadingState) {
-                        showDialog(
-                          context: context,
-                          builder: (c) => Center(
-                            child: CircularProgressIndicator(
-                              color: AppColors.primaryColor,
-                            ),
-                          ),
-                        );
-                      } else if (state is AddToCartSuccessState) {
-                        Navigator.pop(context);
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text('Added to cart successfully')),
-                        );
-                      } else if (state is AddToCartLoadingState) {
-                        Navigator.pop(context);
-                        ScaffoldMessenger.of(
-                          context,
-                        ).showSnackBar(SnackBar(content: Text('Failed')));
-                      }
-                      // TODO: implement listener
-                    },
-                    child: InkWell(
-                      onTap: () {
-                        context.read<HomeCubitCubit>().addToCart(
-                          products?.id ?? 0,
-                        );
-                      },
-                      child: Container(
-                        padding: EdgeInsets.symmetric(
-                          vertical: 5.w,
-                          horizontal: 15.h,
-                        ),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
-                          color: Colors.black,
-                        ),
-                        child: Center(
-                          child: Text(
-                            LocaleKeys.Buy,
-                            style: TextStyle(
-                              fontSize: 20.sp,
-                              color: Colors.white,
-                            ),
+                  InkWell(
+                    onTap: () {},
+                    child: Container(
+                      padding: EdgeInsets.symmetric(
+                        vertical: 5.w,
+                        horizontal: 15.h,
+                      ),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        color: Colors.black,
+                      ),
+                      child: Center(
+                        child: Text(
+                          LocaleKeys.Buy,
+                          style: TextStyle(
+                            fontSize: 20.sp,
+                            color: Colors.white,
                           ),
                         ),
                       ),

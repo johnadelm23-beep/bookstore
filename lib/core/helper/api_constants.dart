@@ -9,5 +9,6 @@ class ApiConstants {
   static const String addFavourite = 'add-to-wishlist';
   static const String addToCart = 'add-to-cart';
   static const String removeFavorite = 'remove-from-wishlist';
+  static const String showBookMark = 'wishlist';
 }
 //13586|lzRzR8YMVhkFS3FykevDedHidz37Xe4p8pcn4Vo6

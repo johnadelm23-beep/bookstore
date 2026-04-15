@@ -39,7 +39,7 @@ class _AppBarDetailsScreenState extends State<AppBarDetailsScreen> {
         Spacer(),
         BlocListener<HomeCubitCubit, HomeCubitState>(
           listener: (context, state) {
-            if (state is BookMarkLoadingSate) {
+            if (state is BookMarkLoadingState) {
               showDialog(
                 context: context,
                 builder: (c) => Center(
@@ -51,6 +51,7 @@ class _AppBarDetailsScreenState extends State<AppBarDetailsScreen> {
             } else if (state is BookMarkSuccessState) {
               if (isMark) {
                 Navigator.pop(context);
+
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     duration: Duration(seconds: 2),

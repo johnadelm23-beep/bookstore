@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:bloc/bloc.dart';
 import 'package:book_stroe/features/bookmark/data/bookmark_repo.dart';
 import 'package:book_stroe/features/cart/data/cart_repo.dart';
@@ -27,35 +29,33 @@ class HomeCubitCubit extends Cubit<HomeCubitState> {
     }
   }
 
-  Future<void> addToCart(int productId) async {
-    print('loading.................');
-    emit(AddToCartLoadingState());
-    final response = await CartRepo.addToCart(productId: productId);
-    if (response) {
-      print('success...............................');
-      emit(AddToCartSuccessState());
-    } else {
-      emit(AddToCartErrorState());
-    }
-  }
-
-  Future<void> addToFavorite({required int bookId}) async {
-    emit(BookMarkLoadingSate());
+  Future<void> addFavorite({required int bookId}) async {
+    emit(BookMarkLoadingState());
     final response = await BookMarkRepo.addToFavourite(bookId: bookId);
     if (response) {
-      emit(BookMarkSuccessState(isAdded: true));
+      emit(BookMarkSuccessState(isAdded: true, productId: bookId));
     } else {
-      emit(BookMarkErrorState());
+      emit(ShowBookMarkErrorState());
     }
   }
 
-  Future<void> removeFroFavorite({required int bookId}) async {
-    emit(BookMarkLoadingSate());
-    final response = await BookMarkRepo.removeFromFavorite(bookId: bookId);
+  Future<void> removeFavorite({required int bookId}) async {
+    emit(BookMarkLoadingState());
+    final response = await BookMarkRepo.addToFavourite(bookId: bookId);
     if (response) {
-      emit(BookMarkSuccessState(isAdded: false));
+      emit(BookMarkSuccessState(isAdded: false, productId: bookId));
     } else {
-      emit(BookMarkErrorState());
+      emit(ShowBookMarkErrorState());
+    }
+  }
+
+  Future<void> showWishList() async {
+    emit(ShowBookMarkLoadingState());
+    final response = await BookMarkRepo.showBookMark();
+    if (response != null) {
+      emit(ShowBookMarkSuccessState(wishList: response.data.products));
+    } else {
+      emit(ShowBookMarkErrorState());
     }
   }
 }

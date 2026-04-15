@@ -15,17 +15,21 @@ final class HomeSuccessState extends HomeCubitState {
 
 final class HomeErrorState extends HomeCubitState {}
 
-final class AddToCartSuccessState extends HomeCubitState {}
+final class BookMarkLoadingState extends HomeCubitState {}
 
-final class AddToCartErrorState extends HomeCubitState {}
+final class BookMarhErrorState extends HomeCubitState {}
 
-final class AddToCartLoadingState extends HomeLoadingState {}
-
-final class BookMarkLoadingSate extends HomeLoadingState {}
-
-final class BookMarkSuccessState extends HomeLoadingState {
+final class BookMarkSuccessState extends HomeCubitState {
   final bool isAdded;
-  BookMarkSuccessState({required this.isAdded});
+  final int productId;
+  BookMarkSuccessState({required this.isAdded, required this.productId});
 }
 
-final class BookMarkErrorState extends HomeLoadingState {}
+final class ShowBookMarkLoadingState extends HomeCubitState {}
+
+final class ShowBookMarkErrorState extends HomeCubitState {}
+
+final class ShowBookMarkSuccessState extends HomeCubitState {
+  final List<Product> wishList;
+  ShowBookMarkSuccessState({required this.wishList});
+}

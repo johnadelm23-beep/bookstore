@@ -1,5 +1,6 @@
 import 'package:book_stroe/core/helper/api_constants.dart';
 import 'package:book_stroe/features/bottom_nav_bar/ui/bottom_nav_bar_screen.dart';
+import 'package:book_stroe/features/bottom_nav_bar/ui/widgets/bottom_nav_bar_warp.dart';
 import 'package:book_stroe/features/welcome/ui/welcome_screen.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +30,7 @@ class BookStore extends StatelessWidget {
     if (ApiConstants.token == null) {
       return WelcomeScreen();
     } else {
-      return BottomNavBarScreen();
+      return BottomNavBarWrapper();
     }
   }
 }
