@@ -11,6 +11,7 @@ class ApiConstants {
   static const String removeCart = "remove-from-cart";
   static const String updateCart = "update-cart";
   static const String cart = "cart";
+  static const String profile = "profile";
   static const String removeFavorite = 'remove-from-wishlist';
   static const String showBookMark = 'wishlist';
 }

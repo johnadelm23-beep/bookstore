@@ -4,15 +4,27 @@ import 'package:book_stroe/features/home/cubit/cubit/home_cubit_cubit.dart';
 import 'package:book_stroe/features/home/ui/widgets/custom_container_products.dart';
 import 'package:book_stroe/features/home/ui/widgets/custom_slider.dart';
 import 'package:book_stroe/features/home/ui/widgets/home_app_bar.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  @override
+void initState() {
+  super.initState();
+
+  Future.microtask(() {
+    context.read<HomeCubitCubit>().getHomeData();
+  });
+}
   @override
   Widget build(BuildContext context) {
     return BlocListener<CartCubit, CartState>(
@@ -20,7 +32,7 @@ class HomeScreen extends StatelessWidget {
         if (state is CartSuccess) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
-              content: Text("Added to cart successfully ✅"),
+              content: Text("Added to cart successfully"),
               backgroundColor: Colors.green,
             ),
           );
@@ -29,7 +41,7 @@ class HomeScreen extends StatelessWidget {
         if (state is CartError) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
-              content: Text("Failed to add to cart ❌"),
+              content: Text("Failed to add to cart"),
               backgroundColor: Colors.red,
             ),
           );
@@ -51,12 +63,10 @@ class HomeScreen extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          // 🔵 SLIDER SECTION
                           SizedBox(height: 180.h, child: _buildSlider(state)),
 
                           SizedBox(height: 10.h),
 
-                          // 🟡 TITLE
                           Text(
                             "Best Seller Books",
                             style: TextStyle(fontSize: 22.sp),
@@ -64,7 +74,6 @@ class HomeScreen extends StatelessWidget {
 
                           SizedBox(height: 10.h),
 
-                          // 🟢 PRODUCTS GRID
                           _buildProducts(state),
                         ],
                       ),
@@ -79,7 +88,6 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  // ---------------- SLIDER ----------------
   Widget _buildSlider(HomeCubitState state) {
     if (state is HomeLoadingState) {
       return Skeletonizer(
@@ -99,7 +107,6 @@ class HomeScreen extends StatelessWidget {
     return const SizedBox();
   }
 
-  // ---------------- PRODUCTS ----------------
   Widget _buildProducts(HomeCubitState state) {
     if (state is HomeLoadingState) {
       return GridView.builder(

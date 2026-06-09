@@ -1,4 +1,5 @@
 import 'package:book_stroe/core/helper/api_constants.dart';
+import 'package:book_stroe/features/bookmark/cubit/cubit/bookmark_cubit.dart';
 import 'package:book_stroe/features/bottom_nav_bar/ui/bottom_nav_bar_screen.dart';
 import 'package:book_stroe/features/bottom_nav_bar/ui/widgets/bottom_nav_bar_warp.dart';
 import 'package:book_stroe/features/cart/cubit/cubit/cubit/cart_cubit.dart';
@@ -22,6 +23,7 @@ class BookStore extends StatelessWidget {
         providers: [
           BlocProvider<HomeCubitCubit>(create: (context) => HomeCubitCubit()),
           BlocProvider<CartCubit>(create: (context) => CartCubit()),
+          BlocProvider<BookmarkCubit>(create: (c) => BookmarkCubit()),
         ],
 
         child: MaterialApp(
@@ -40,7 +42,7 @@ class BookStore extends StatelessWidget {
     if (ApiConstants.token == null) {
       return WelcomeScreen();
     } else {
-      return BottomNavBarWrapper();
+      return const BottomNavBarWrapper();
     }
   }
 }

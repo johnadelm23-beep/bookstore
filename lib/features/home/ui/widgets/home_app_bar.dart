@@ -36,7 +36,7 @@ class HomeAppBar extends StatelessWidget {
           },
           child: SvgPicture.asset('assets/icons/search-normal.svg'),
         ),
-
+        /* 
         IconButton(
           onPressed: () async {
             var prefs = await SharedPreferences.getInstance();
@@ -47,7 +47,7 @@ class HomeAppBar extends StatelessWidget {
             );
           },
           icon: Icon(Icons.logout),
-        ),
+        ),*/
       ],
     );
   }
