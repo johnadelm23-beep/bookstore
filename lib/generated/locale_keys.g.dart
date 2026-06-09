@@ -34,5 +34,16 @@ abstract class  LocaleKeys {
   static const Buy = 'Buy';
   static const priceProduct = 'priceProduct';
   static const searchHint = 'searchHint';
+  static const wishlist = 'wishlist';
+  static const addToCart = 'addToCart';
+  static const addToFavorites = 'addToFavorites';
+  static const removeFromFavorites = 'removeFromFavorites';
+  static const emptyWishlist = 'emptyWishlist';
+  static const loading = 'loading';
+  static const noName = 'noName';
+  static const noCategory = 'noCategory';
+  static const noDescription = 'noDescription';
+  static const cartAddSuccess = 'cartAddSuccess';
+  static const cartAddFailed = 'cartAddFailed';
 
 }

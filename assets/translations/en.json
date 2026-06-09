@@ -29,5 +29,16 @@
   "Cart": "Cart",
   "Buy": "Buy",
   "priceProduct": "{price} $",
-  "searchHint": "Search book...."
+  "searchHint": "Search book....",
+  "wishlist": "WishList",
+  "addToCart": "Add to cart",
+  "addToFavorites": "Added to favorites successfully",
+  "removeFromFavorites": "Removed from favorites successfully",
+  "emptyWishlist": "Your wishlist is empty",
+  "loading": "Loading...",
+  "noName": "No name",
+  "noCategory": "No category",
+  "noDescription": "No description",
+  "cartAddSuccess": "Added to cart successfully",
+  "cartAddFailed": "Failed to add to cart"
 }

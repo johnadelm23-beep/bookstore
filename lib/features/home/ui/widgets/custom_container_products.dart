@@ -1,5 +1,6 @@
 import 'package:book_stroe/core/theme/app_colors.dart';
 import 'package:book_stroe/core/widgets/custom_network_image.dart';
+import 'package:book_stroe/features/bookmark/cubit/cubit/bookmark_cubit.dart';
 import 'package:book_stroe/features/cart/cubit/cubit/cubit/cart_cubit.dart';
 import 'package:book_stroe/features/home/data/model/product_model.dart';
 import 'package:book_stroe/features/details/ui/details_screen.dart';
@@ -20,7 +21,12 @@ class CustomContainerProducts extends StatelessWidget {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (_) => DetailsScreen(product: products)),
+          MaterialPageRoute(
+            builder: (_) => BlocProvider.value(
+              value: context.read<BookmarkCubit>(),
+              child: DetailsScreen(product: products),
+            ),
+          ),
         );
       },
       child: Container(

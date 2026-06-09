@@ -29,5 +29,16 @@
   "Cart": "سلة المشتريات",
   "Buy": "شراء",
   "priceProduct": "{price} د.أ",
-  "searchHint": "ابحث عن كتاب..."
+  "searchHint": "ابحث عن كتاب...",
+  "wishlist": "المفضلة",
+  "addToCart": "إضافة إلى السلة",
+  "addToFavorites": "تمت الإضافة إلى المفضلة بنجاح",
+  "removeFromFavorites": "تمت الإزالة من المفضلة بنجاح",
+  "emptyWishlist": "المفضلة فارغة",
+  "loading": "جاري التحميل...",
+  "noName": "بدون اسم",
+  "noCategory": "بدون تصنيف",
+  "noDescription": "بدون وصف",
+  "cartAddSuccess": "تمت الإضافة إلى السلة بنجاح",
+  "cartAddFailed": "فشل إضافة المنتج إلى السلة"
 }

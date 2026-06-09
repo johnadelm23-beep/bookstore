@@ -54,7 +54,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               children: [
                 CustomTextFormField(
                   hintText: LocaleKeys.userName.tr(),
-                  isPassword: false,
+
                   controller: userNameController,
                   validator: (value) => value == null || value.isEmpty
                       ? 'Please enter your name'
@@ -63,7 +63,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 SizedBox(height: 11.h),
                 CustomTextFormField(
                   hintText: LocaleKeys.email.tr(),
-                  isPassword: false,
+
                   controller: emailController,
                   validator: (value) => value == null || !value.contains('@')
                       ? 'Please enter a valid email'

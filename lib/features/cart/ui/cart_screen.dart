@@ -2,6 +2,7 @@ import 'package:book_stroe/core/widgets/app_button.dart';
 import 'package:book_stroe/features/cart/cubit/cubit/cubit/cart_cubit.dart';
 import 'package:book_stroe/features/cart/cubit/cubit/cubit/cart_state.dart';
 import 'package:book_stroe/features/cart/ui/widgets/custom_container_change.dart';
+import 'package:book_stroe/features/place_order/ui/place_order_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -180,6 +181,8 @@ class _CartScreenState extends State<CartScreen> {
             BlocBuilder<CartCubit, CartState>(
               builder: (context, state) {
                 if (state is CartSuccess) {
+                  final isEmpty = state.cart.data.cartItems.isEmpty;
+
                   return Column(
                     children: [
                       Row(
@@ -198,7 +201,21 @@ class _CartScreenState extends State<CartScreen> {
 
                       SizedBox(height: 10.h),
 
-                      AppButton(text: "Checkout", onTap: () {}),
+                      AppButton(
+                        text: "Checkout",
+                        onTap: isEmpty
+                            ? null
+                            : () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (c) => PlaceOrderScreen(
+                                      total: state.cart.data.total,
+                                    ),
+                                  ),
+                                );
+                              },
+                      ),
                     ],
                   );
                 }
