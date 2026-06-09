@@ -1,118 +1,152 @@
-import 'package:book_stroe/core/theme/app_colors.dart';
+import 'package:book_stroe/features/cart/cubit/cubit/cubit/cart_cubit.dart';
+import 'package:book_stroe/features/cart/cubit/cubit/cubit/cart_state.dart';
 import 'package:book_stroe/features/home/cubit/cubit/home_cubit_cubit.dart';
 import 'package:book_stroe/features/home/ui/widgets/custom_container_products.dart';
 import 'package:book_stroe/features/home/ui/widgets/custom_slider.dart';
 import 'package:book_stroe/features/home/ui/widgets/home_app_bar.dart';
-import 'package:book_stroe/generated/locale_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: BlocBuilder<HomeCubitCubit, HomeCubitState>(
-        builder: (context, state) {
-          return Column(
-            children: [
-              HomeAppBar(),
+    return BlocListener<CartCubit, CartState>(
+      listener: (context, state) {
+        if (state is CartSuccess) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text("Added to cart successfully ✅"),
+              backgroundColor: Colors.green,
+            ),
+          );
+        }
 
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          height: 180.h,
-                          child: state is HomeLoadingState
-                              ? Skeletonizer(
-                                  enabled: true,
-                                  child: Container(
-                                    width: double.infinity,
-                                    height: 180.h,
-                                    color: Colors.grey.shade300,
-                                  ),
-                                )
-                              : (state is HomeSuccessState
-                                    ? CustomSlider(sliders: state.sliders)
-                                    : SizedBox()),
-                        ),
+        if (state is CartError) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text("Failed to add to cart ❌"),
+              backgroundColor: Colors.red,
+            ),
+          );
+        }
+      },
+      child: Scaffold(
+        backgroundColor: Colors.white,
 
-                        SizedBox(height: 10),
+        body: BlocBuilder<HomeCubitCubit, HomeCubitState>(
+          builder: (context, state) {
+            return Column(
+              children: [
+                HomeAppBar(),
 
-                        Text(
-                          LocaleKeys.booksTitleBestSeller,
-                          style: TextStyle(fontSize: 25.sp),
-                        ).tr(),
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          // 🔵 SLIDER SECTION
+                          SizedBox(height: 180.h, child: _buildSlider(state)),
 
-                        SizedBox(height: 10),
+                          SizedBox(height: 10.h),
 
-                        if (state is HomeLoadingState)
-                          GridView.builder(
-                            shrinkWrap: true,
-                            physics: NeverScrollableScrollPhysics(),
-                            itemCount: 6,
-                            gridDelegate:
-                                SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 2,
-                                  crossAxisSpacing: 10,
-                                  mainAxisSpacing: 10,
-                                  childAspectRatio: 162 / 281,
-                                ),
-                            itemBuilder: (context, index) {
-                              return Skeletonizer(
-                                enabled: true,
-                                child: CustomContainerProducts(
-                                  products: null,
-                                  backGroundColor: Colors.grey.shade300,
-                                ),
-                              );
-                            },
-                          )
-                        else if (state is HomeSuccessState)
-                          GridView.builder(
-                            shrinkWrap: true,
-                            physics: NeverScrollableScrollPhysics(),
-                            itemCount: state.products.length,
-                            gridDelegate:
-                                SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 2,
-                                  crossAxisSpacing: 10,
-                                  mainAxisSpacing: 10,
-                                  childAspectRatio: 162 / 281,
-                                ),
-                            itemBuilder: (context, index) {
-                              final product = state.products[index];
-                              return CustomContainerProducts(
-                                products: product,
-                                onPressed: () {},
-                              );
-                            },
-                          )
-                        else
-                          Center(child: Text(LocaleKeys.errorLabel).tr()),
-                      ],
+                          // 🟡 TITLE
+                          Text(
+                            "Best Seller Books",
+                            style: TextStyle(fontSize: 22.sp),
+                          ),
+
+                          SizedBox(height: 10.h),
+
+                          // 🟢 PRODUCTS GRID
+                          _buildProducts(state),
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
-          );
-        },
+              ],
+            );
+          },
+        ),
       ),
     );
+  }
+
+  // ---------------- SLIDER ----------------
+  Widget _buildSlider(HomeCubitState state) {
+    if (state is HomeLoadingState) {
+      return Skeletonizer(
+        enabled: true,
+        child: Container(
+          height: 180.h,
+          width: double.infinity,
+          color: Colors.grey.shade300,
+        ),
+      );
+    }
+
+    if (state is HomeSuccessState) {
+      return CustomSlider(sliders: state.sliders);
+    }
+
+    return const SizedBox();
+  }
+
+  // ---------------- PRODUCTS ----------------
+  Widget _buildProducts(HomeCubitState state) {
+    if (state is HomeLoadingState) {
+      return GridView.builder(
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        itemCount: 6,
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          crossAxisSpacing: 10,
+          mainAxisSpacing: 10,
+          childAspectRatio: 162 / 281,
+        ),
+        itemBuilder: (context, index) {
+          return Skeletonizer(
+            enabled: true,
+            child: CustomContainerProducts(products: null),
+          );
+        },
+      );
+    }
+
+    if (state is HomeSuccessState) {
+      return GridView.builder(
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        itemCount: state.products.length,
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          crossAxisSpacing: 10,
+          mainAxisSpacing: 10,
+          childAspectRatio: 162 / 281,
+        ),
+        itemBuilder: (context, index) {
+          return CustomContainerProducts(products: state.products[index]);
+        },
+      );
+    }
+
+    if (state is HomeErrorState) {
+      return const Center(
+        child: Text(
+          "Something went wrong",
+          style: TextStyle(color: Colors.red),
+        ),
+      );
+    }
+
+    return const SizedBox();
   }
 }

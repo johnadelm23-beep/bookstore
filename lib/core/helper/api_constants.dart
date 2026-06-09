@@ -8,6 +8,9 @@ class ApiConstants {
   static const String search = 'products-search';
   static const String addFavourite = 'add-to-wishlist';
   static const String addToCart = 'add-to-cart';
+  static const String removeCart = "remove-from-cart";
+  static const String updateCart = "update-cart";
+  static const String cart = "cart";
   static const String removeFavorite = 'remove-from-wishlist';
   static const String showBookMark = 'wishlist';
 }

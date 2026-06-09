@@ -43,10 +43,7 @@ class BookmarkScreen extends StatelessWidget {
                   ),
                   itemBuilder: (context, index) {
                     final product = state.wishList[index];
-                    return CustomContainerProducts(
-                      products: product,
-                      onPressed: () {},
-                    );
+                    return CustomContainerProducts(products: product);
                   },
                 );
               } else if (state is ShowBookMarkErrorState) {

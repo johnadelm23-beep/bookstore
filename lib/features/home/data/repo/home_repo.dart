@@ -4,31 +4,32 @@ import 'package:book_stroe/features/home/data/model/product_model.dart';
 import 'package:book_stroe/features/home/data/model/slider_model.dart';
 
 class HomeRepo {
-  static Future<SliderResponse?>? getSlider() async {
+  static Future<SliderResponse?> getSlider() async {
     try {
       final response = await DioHelper.dio?.get(ApiConstants.slider);
-      if (response?.statusCode == 200) {
-        SliderResponse data = SliderResponse.fromJson(response?.data);
-        return data;
-      } else {
-        return null;
+
+      if (response?.statusCode == 200 && response?.data != null) {
+        return SliderResponse.fromJson(response!.data);
       }
+
+      return null;
     } catch (e) {
+      print("Slider Error: $e");
       return null;
     }
   }
 
-  static Future<ProductsResponse?>? getProducts() async {
+  static Future<ProductsResponse?> getProducts() async {
     try {
       final response = await DioHelper.dio?.get(ApiConstants.products);
-      if (response?.statusCode == 200) {
-        ProductsResponse data = ProductsResponse.fromJson(response?.data);
-        print("Success ================================");
-        return data;
-      } else {
-        return null;
+
+      if (response?.statusCode == 200 && response?.data != null) {
+        return ProductsResponse.fromJson(response!.data);
       }
+
+      return null;
     } catch (e) {
+      print("Products Error: $e");
       return null;
     }
   }

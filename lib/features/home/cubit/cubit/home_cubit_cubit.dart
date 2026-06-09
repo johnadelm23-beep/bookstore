@@ -1,8 +1,5 @@
-import 'dart:math';
-
 import 'package:bloc/bloc.dart';
 import 'package:book_stroe/features/bookmark/data/bookmark_repo.dart';
-import 'package:book_stroe/features/cart/data/cart_repo.dart';
 import 'package:book_stroe/features/home/data/model/product_model.dart';
 import 'package:book_stroe/features/home/data/model/slider_model.dart';
 import 'package:book_stroe/features/home/data/repo/home_repo.dart';
@@ -15,16 +12,27 @@ class HomeCubitCubit extends Cubit<HomeCubitState> {
 
   Future<void> getHomeData() async {
     emit(HomeLoadingState());
-    final slider = await HomeRepo.getSlider();
-    final product = await HomeRepo.getProducts();
-    if (slider != null && product != null) {
+
+    try {
+      final slider = await HomeRepo.getSlider();
+      final product = await HomeRepo.getProducts();
+
+      print("SLIDER => $slider");
+      print("PRODUCT => $product");
+
+      if (slider == null || product == null) {
+        emit(HomeErrorState());
+        return;
+      }
+
       emit(
         HomeSuccessState(
           sliders: slider.data?.sliders ?? [],
-          products: product.data.products,
+          products: product.data?.products ?? [],
         ),
       );
-    } else {
+    } catch (e) {
+      print("HOME ERROR => $e");
       emit(HomeErrorState());
     }
   }
@@ -32,26 +40,30 @@ class HomeCubitCubit extends Cubit<HomeCubitState> {
   Future<void> addFavorite({required int bookId}) async {
     emit(BookMarkLoadingState());
     final response = await BookMarkRepo.addToFavourite(bookId: bookId);
+
     if (response) {
       emit(BookMarkSuccessState(isAdded: true, productId: bookId));
     } else {
-      emit(ShowBookMarkErrorState());
+      emit(BookMarhErrorState());
     }
   }
 
   Future<void> removeFavorite({required int bookId}) async {
     emit(BookMarkLoadingState());
     final response = await BookMarkRepo.addToFavourite(bookId: bookId);
+
     if (response) {
       emit(BookMarkSuccessState(isAdded: false, productId: bookId));
     } else {
-      emit(ShowBookMarkErrorState());
+      emit(BookMarhErrorState());
     }
   }
 
   Future<void> showWishList() async {
     emit(ShowBookMarkLoadingState());
+
     final response = await BookMarkRepo.showBookMark();
+
     if (response != null) {
       emit(ShowBookMarkSuccessState(wishList: response.data.products));
     } else {
