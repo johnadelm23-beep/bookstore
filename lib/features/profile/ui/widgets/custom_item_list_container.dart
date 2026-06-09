@@ -15,14 +15,14 @@ class CustomItemListContainer extends StatelessWidget {
         width: double.infinity,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
-          color: Colors.grey.shade300,
+          color: Color(0xffE8ECF4),
         ),
         child: Row(
           children: [
             Expanded(
               child: Text(
                 title,
-                style: TextStyle(fontSize: 20.sp, color: Colors.black),
+                style: TextStyle(fontSize: 17.sp, color: Colors.black),
               ),
             ),
             Icon(Icons.arrow_right_outlined, size: 30.r),

@@ -16,7 +16,8 @@ class BottomNavBarWrapper extends StatelessWidget {
         BlocProvider(create: (_) => HomeCubitCubit()..getHomeData()),
         BlocProvider(create: (_) => CartCubit()),
         BlocProvider(create: (_) => BookmarkCubit()..showBookmark()),
-        BlocProvider(create: (_) => ProfileCubit()..showProfile()),
+        BlocProvider(create: (_) => ProfileCubit()),
+
         //BlocProvider(create: (_) => BookmarkCubit()),
       ],
       child: const BottomNavBarScreen(),

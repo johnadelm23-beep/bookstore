@@ -1,5 +1,7 @@
 import 'package:book_stroe/core/theme/app_colors.dart';
 import 'package:book_stroe/features/profile/cubit/cubit/profile_cubit.dart';
+import 'package:book_stroe/features/profile/cubit/cubit/profile_state.dart';
+import 'package:book_stroe/features/profile/ui/editt_profile_screen.dart';
 import 'package:book_stroe/features/profile/ui/widgets/custom_app_bar_profile.dart';
 import 'package:book_stroe/features/profile/ui/widgets/custom_header.dart';
 import 'package:book_stroe/features/profile/ui/widgets/custom_item_list_container.dart';
@@ -41,8 +43,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
             return SingleChildScrollView(
               child: Column(
+                spacing: 5.h,
                 children: [
-                  const CustomAppBarProfile(),
+                  const CustomAppBarProfile(title: 'Profile'),
 
                   SizedBox(height: 20.h),
 
@@ -54,7 +57,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                   SizedBox(height: 12.h),
 
-                  const CustomItemListContainer(title: "Edit profile"),
+                  CustomItemListContainer(
+                    title: "Edit profile",
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => BlocProvider.value(
+                            value: context.read<ProfileCubit>(),
+                            child: EdittProfileScreen(user: user),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
 
                   SizedBox(height: 12.h),
 

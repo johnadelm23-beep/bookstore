@@ -13,18 +13,21 @@ class CustomHeader extends StatelessWidget {
       children: [
         CircleAvatar(
           radius: 50.r,
-          backgroundColor: Colors.grey.shade300,
-          child: Icon(IconlyLight.profile, size: 50.r, color: Colors.black),
+          child: ClipRRect(
+            borderRadius: BorderRadiusGeometry.circular(100),
+            child: Image.network(user.image),
+          ),
         ),
         SizedBox(width: 10.w),
         Column(
+          crossAxisAlignment: .start,
           mainAxisAlignment: .spaceBetween,
           children: [
             Text(user.name, style: TextStyle(fontSize: 20.sp)),
             SizedBox(height: 10.h),
             Text(
               user.email,
-              style: TextStyle(fontSize: 20.sp, color: Colors.grey.shade400),
+              style: TextStyle(fontSize: 20.sp, color: Colors.grey.shade500),
             ),
           ],
         ),

@@ -1,15 +1,17 @@
-part of 'profile_cubit.dart';
+import 'package:book_stroe/features/profile/data/models/user_model.dart';
 
-@immutable
-sealed class ProfileState {}
+abstract class ProfileState {}
 
-final class ProfileInitial extends ProfileState {}
+class ProfileInitial extends ProfileState {}
 
-final class ProfileLoading extends ProfileState {}
+class ProfileLoading extends ProfileState {}
 
-final class ProfileSuccess extends ProfileState {
+class ProfileSuccess extends ProfileState {
   final UserData user;
   ProfileSuccess({required this.user});
 }
 
-final class ProfileError extends ProfileState {}
+class ProfileError extends ProfileState {
+  final String message;
+  ProfileError(this.message);
+}

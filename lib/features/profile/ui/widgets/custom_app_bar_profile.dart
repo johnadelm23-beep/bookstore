@@ -5,8 +5,8 @@ import 'package:iconly/iconly.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CustomAppBarProfile extends StatelessWidget {
-  const CustomAppBarProfile({super.key});
-
+  const CustomAppBarProfile({super.key, required this.title});
+  final String title;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -15,7 +15,7 @@ class CustomAppBarProfile extends StatelessWidget {
         Expanded(
           child: Center(
             child: Text(
-              "Profile",
+              title,
               style: TextStyle(fontSize: 30.sp, fontWeight: .bold),
             ),
           ),
