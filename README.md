@@ -6,7 +6,10 @@ A Flutter project for managing books and bookstore features. This app allows use
 
 ## 📸 Screenshots
 
-https://github.com/user-attachments/assets/db1f0d59-481c-4b76-aa3c-bd520eab3277
+
+
+https://github.com/user-attachments/assets/663a04c1-f3a7-4711-a2a9-2cc715ee503e
+
 
 ---
 
