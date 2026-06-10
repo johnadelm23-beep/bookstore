@@ -1,4 +1,6 @@
 import 'package:book_stroe/core/widgets/app_button.dart';
+import 'package:book_stroe/features/cart/cubit/cubit/checkout_cubit.dart';
+import 'package:book_stroe/features/cart/cubit/cubit/checkout_state.dart';
 import 'package:book_stroe/features/cart/cubit/cubit/cubit/cart_cubit.dart';
 import 'package:book_stroe/features/cart/cubit/cubit/cubit/cart_state.dart';
 import 'package:book_stroe/features/cart/ui/widgets/custom_container_change.dart';
@@ -80,7 +82,6 @@ class _CartScreenState extends State<CartScreen> {
                                 height: 100.h,
                                 fit: BoxFit.cover,
                               ),
-
                               SizedBox(width: 10.w),
 
                               Expanded(
@@ -88,8 +89,6 @@ class _CartScreenState extends State<CartScreen> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
                                       children: [
                                         Expanded(
                                           child: Text(
@@ -101,22 +100,19 @@ class _CartScreenState extends State<CartScreen> {
                                             ),
                                           ),
                                         ),
-
                                         IconButton(
                                           onPressed: () {
                                             context
                                                 .read<CartCubit>()
                                                 .removeFromCart(item.itemId);
                                           },
-                                          icon: Icon(
+                                          icon: const Icon(
                                             IconlyLight.delete,
                                             color: Colors.red,
                                           ),
                                         ),
                                       ],
                                     ),
-
-                                    SizedBox(height: 5.h),
 
                                     Text(
                                       "${item.productPriceAfterDiscount} \$",
@@ -126,8 +122,6 @@ class _CartScreenState extends State<CartScreen> {
                                         fontWeight: FontWeight.w600,
                                       ),
                                     ),
-
-                                    SizedBox(height: 10.h),
 
                                     Row(
                                       children: [
@@ -143,11 +137,7 @@ class _CartScreenState extends State<CartScreen> {
                                           },
                                         ),
                                         SizedBox(width: 10.w),
-
-                                        Text(
-                                          item.quantity.toString(),
-                                          style: TextStyle(fontSize: 15.sp),
-                                        ),
+                                        Text(item.quantity.toString()),
                                         SizedBox(width: 10.w),
                                         CustomContainerChange(
                                           icon: Icons.add,
@@ -178,49 +168,57 @@ class _CartScreenState extends State<CartScreen> {
             ),
 
             /// TOTAL + CHECKOUT
-            BlocBuilder<CartCubit, CartState>(
-              builder: (context, state) {
-                if (state is CartSuccess) {
-                  final isEmpty = state.cart.data.cartItems.isEmpty;
-
-                  return Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text("Total:", style: TextStyle(fontSize: 20.sp)),
-                          Text(
-                            "${state.cart.data.total} EGP",
-                            style: TextStyle(
-                              fontSize: 20.sp,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
-                      ),
-
-                      SizedBox(height: 10.h),
-
-                      AppButton(
-                        text: "Checkout",
-                        onTap: isEmpty
-                            ? null
-                            : () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (c) => PlaceOrderScreen(
-                                      total: state.cart.data.total,
-                                    ),
-                                  ),
-                                );
-                              },
-                      ),
-                    ],
+            BlocConsumer<CheckoutCubit, CheckoutState>(
+              listener: (context, state) {
+                if (state is CheckoutSuccess) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) =>
+                          PlaceOrderScreen(total: state.model.total),
+                    ),
                   );
                 }
 
-                return const SizedBox();
+                if (state is CheckoutError) {
+                  ScaffoldMessenger.of(
+                    context,
+                  ).showSnackBar(SnackBar(content: Text(state.error)));
+                }
+              },
+              builder: (context, state) {
+                final cartState = context.watch<CartCubit>().state;
+
+                if (cartState is! CartSuccess) return const SizedBox();
+
+                final isEmpty = cartState.cart.data.cartItems.isEmpty;
+
+                return Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text("Total:"),
+                        Text(
+                          "${cartState.cart.data.total} EGP",
+                          style: const TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
+
+                    SizedBox(height: 10.h),
+
+                    AppButton(
+                      text: "Checkout",
+                      isLoading: state is CheckoutLoading,
+                      onTap: isEmpty
+                          ? null
+                          : () {
+                              context.read<CheckoutCubit>().checkout();
+                            },
+                    ),
+                  ],
+                );
               },
             ),
           ],

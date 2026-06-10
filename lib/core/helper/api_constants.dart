@@ -14,7 +14,10 @@ class ApiConstants {
   static const String cart = "cart";
   static const String orderHistory = "order-history";
   static const String profile = "profile";
+  static const String checkout = "checkout";
   static const String removeFavorite = 'remove-from-wishlist';
   static const String showBookMark = 'wishlist';
+  static const String placeOrder = "place-order";
+  static const String governs = "governorates";
 }
 //13586|lzRzR8YMVhkFS3FykevDedHidz37Xe4p8pcn4Vo6

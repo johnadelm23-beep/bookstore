@@ -4,14 +4,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AppButton extends StatelessWidget {
-  const AppButton({super.key, this.backGround, required this.text, this.onTap});
+  const AppButton({
+    super.key,
+    this.backGround,
+    required this.text,
+    this.onTap,
+    this.isLoading = false,
+  });
+
   final Color? backGround;
   final String text;
   final void Function()? onTap;
+  final bool isLoading;
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: onTap,
+      onTap: isLoading ? null : onTap,
       child: Container(
         width: double.infinity,
         padding: EdgeInsets.symmetric(vertical: 19.h),
@@ -21,13 +30,22 @@ class AppButton extends StatelessWidget {
           color: backGround ?? AppColors.primaryColor,
         ),
         child: Center(
-          child: Text(
-            text.tr(),
-            style: TextStyle(
-              fontSize: 18.sp,
-              color: backGround == null ? Colors.white : Colors.black,
-            ),
-          ),
+          child: isLoading
+              ? const SizedBox(
+                  height: 24,
+                  width: 24,
+                  child: CircularProgressIndicator(
+                    strokeWidth: 2,
+                    color: Colors.white,
+                  ),
+                )
+              : Text(
+                  text.tr(),
+                  style: TextStyle(
+                    fontSize: 18.sp,
+                    color: backGround == null ? Colors.white : Colors.black,
+                  ),
+                ),
         ),
       ),
     );

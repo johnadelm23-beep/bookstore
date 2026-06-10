@@ -1,19 +1,19 @@
-import 'package:bloc/bloc.dart';
-import 'package:book_stroe/features/order/data/models/order_model.dart';
 import 'package:book_stroe/features/order/data/order_repo.dart';
-import 'package:meta/meta.dart';
-
-part 'order_state.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'order_state.dart';
 
 class OrderCubit extends Cubit<OrderState> {
   OrderCubit() : super(OrderInitial());
-  getOrderHistory() async {
-    emit(OrderHistoryLoading());
-    final response = await OrderRepo.getOrderHistory();
-    if (response != null) {
-      emit(OrderHistorySuccess(order: response.data.orders));
+
+  Future<void> getOrders() async {
+    emit(OrderLoading());
+
+    final result = await OrderRepo.getOrderHistory();
+
+    if (result != null) {
+      emit(OrderSuccess(result.orders));
     } else {
-      emit(OrderHistoryError());
+      emit(OrderError("Failed to load orders"));
     }
   }
 }

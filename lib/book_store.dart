@@ -1,7 +1,7 @@
 import 'package:book_stroe/core/helper/api_constants.dart';
 import 'package:book_stroe/features/bookmark/cubit/cubit/bookmark_cubit.dart';
-import 'package:book_stroe/features/bottom_nav_bar/ui/bottom_nav_bar_screen.dart';
 import 'package:book_stroe/features/bottom_nav_bar/ui/widgets/bottom_nav_bar_warp.dart';
+import 'package:book_stroe/features/cart/cubit/cubit/checkout_cubit.dart';
 import 'package:book_stroe/features/cart/cubit/cubit/cubit/cart_cubit.dart';
 import 'package:book_stroe/features/home/cubit/cubit/home_cubit_cubit.dart';
 import 'package:book_stroe/features/order/cubit/cubit/order_cubit.dart';
@@ -28,6 +28,7 @@ class BookStore extends StatelessWidget {
           BlocProvider<BookmarkCubit>(create: (c) => BookmarkCubit()),
           BlocProvider(create: (_) => ProfileCubit()),
           BlocProvider(create: (_) => OrderCubit()),
+          BlocProvider(create: (_) => CheckoutCubit()),
         ],
 
         child: MaterialApp(

@@ -1,15 +1,19 @@
-part of 'order_cubit.dart';
+import 'package:book_stroe/features/order/data/models/order_model.dart';
 
-@immutable
-sealed class OrderState {}
+abstract class OrderState {}
 
-final class OrderInitial extends OrderState {}
+class OrderInitial extends OrderState {}
 
-final class OrderHistoryLoading extends OrderState {}
+class OrderLoading extends OrderState {}
 
-final class OrderHistorySuccess extends OrderState {
-  final List<Order> order;
-  OrderHistorySuccess({required this.order});
+class OrderSuccess extends OrderState {
+  final List<OrderModel> orders;
+
+  OrderSuccess(this.orders);
 }
 
-final class OrderHistoryError extends OrderState {}
+class OrderError extends OrderState {
+  final String message;
+
+  OrderError(this.message);
+}
