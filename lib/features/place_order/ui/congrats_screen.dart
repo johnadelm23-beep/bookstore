@@ -1,4 +1,5 @@
 import 'package:book_stroe/core/widgets/app_button.dart';
+import 'package:book_stroe/features/bottom_nav_bar/ui/bottom_nav_bar_screen.dart';
 import 'package:book_stroe/features/home/ui/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -53,7 +54,9 @@ class CongratsScreen extends StatelessWidget {
                 onTap: () {
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (c) => const HomeScreen()),
+                    MaterialPageRoute(
+                      builder: (c) => const BottomNavBarScreen(),
+                    ),
                   );
                 },
               ),

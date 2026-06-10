@@ -1,4 +1,6 @@
 import 'package:book_stroe/core/theme/app_colors.dart';
+import 'package:book_stroe/features/order/cubit/cubit/order_cubit.dart';
+import 'package:book_stroe/features/order/ui/order_history_screen.dart';
 import 'package:book_stroe/features/profile/cubit/cubit/profile_cubit.dart';
 import 'package:book_stroe/features/profile/cubit/cubit/profile_state.dart';
 import 'package:book_stroe/features/profile/ui/editt_profile_screen.dart';
@@ -53,7 +55,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                   SizedBox(height: 20.h),
 
-                  const CustomItemListContainer(title: "My Orders"),
+                  CustomItemListContainer(
+                    title: "My Orders",
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => BlocProvider.value(
+                            value: context.read<OrderCubit>(),
+                            child: OrderHistoryScreen(),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
 
                   SizedBox(height: 12.h),
 
