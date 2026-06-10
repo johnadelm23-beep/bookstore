@@ -8,118 +8,95 @@ Bookia allows users to browse books, manage cart, place orders, and track order 
 ## ✨ Features
 
 - 📖 Browse books and featured collections  
-- 🔍 View detailed product pages  
+- 🔍 View book details  
 - 🛒 Add / remove items from cart  
 - ➕ Increase / decrease product quantity  
 - 💳 Checkout & place orders  
 - 🏠 Select governorate dynamically from API  
 - 📦 Order history tracking  
-- 🔐 Authentication support (if integrated)  
-- ⚡ Clean UI with smooth animations  
-- 🌐 API integration using Dio  
+- ⚡ Smooth UI with responsive design  
+- 🌐 REST API integration using Dio  
 - 🧠 State management using BLoC / Cubit  
+- 📱 Fully responsive using ScreenUtil  
 
 ---
 
 ## 🧱 Architecture
 
-This project follows **Clean Architecture (Feature-first structure)**:
-lib/
-├── core/
-├── features/
-│ ├── cart/
-│ ├── home/
-│ ├── auth/
-│ ├── place_order/
-│ ├── order/
-│ └── profile/
+The project follows a **feature-based clean architecture structure**:
 
+lib/
+ ├── core/
+ │    ├── theme/
+ │    ├── widgets/
+ │    └── helper/
+ │
+ ├── features/
+ │    ├── auth/
+ │    ├── home/
+ │    ├── cart/
+ │    ├── place_order/
+ │    ├── order/
+ │    └── profile/
 
 Each feature contains:
-- data (models + repo)
-- cubit (state management)
-- ui (screens + widgets)
+
+data/   → Models + Repository  
+cubit/  → State Management (Bloc/Cubit)  
+ui/     → Screens + Widgets  
 
 ---
 
 ## 🛠️ Tech Stack
 
-- Flutter 💙
-- Dart
-- BLoC / Cubit
-- Dio (API calls)
-- ScreenUtil (responsive UI)
-- EasyLocalization (multi-language support)
-- Lottie animations
-- REST API integration
+- Flutter 💙  
+- Dart  
+- BLoC / Cubit  
+- Dio (Networking)  
+- ScreenUtil (Responsive UI)  
+- Lottie Animations  
+- EasyLocalization (optional)  
+- REST API  
 
 ---
 
 ## 🌐 API Integration
 
-The app integrates with:
+This app integrates with real backend APIs:
 
-- 📦 Cart API  
-- 🧾 Checkout API  
-- 🏁 Place Order API  
-- 🗺️ Governorates API  
-- 📜 Order History API  
+📦 Cart API  
+- Add / remove items  
+- Update quantity  
 
-Example response:
+🧾 Checkout API  
+- Fetch checkout summary  
 
-```json
-{
-  "data": {
-    "orders": [
-      {
-        "id": 51,
-        "order_code": "00051",
-        "order_date": "2023-08-14",
-        "status": "New",
-        "total": "130.51"
-      }
-    ]
-  }
-}
+🏁 Place Order API  
+- Submit order with user data  
 
-📸 Screenshots
-Home	Cart	Checkout
+🗺️ Governorates API  
+- Dynamic dropdown selection  
 
-	
-	
-Order History	Details
+📜 Order History API  
+- Fetch user orders list  
 
-🚀 Getting Started
-1. Clone the repository
+---
+
+## 📸 Screenshots
+
+Home | Cart | Checkout  
+---|---|---  
+![home](https://github.com/user-attachments/assets/eb641ec4-67a1-49ad-9c39-1506820d82a0) | ![cart](https://github.com/user-attachments/assets/0fb97fc1-efc3-4392-9ca2-6d65b3d8cef9) | ![checkout](https://github.com/user-attachments/assets/735fe148-b35f-4fa7-a448-26917c88e709)
+
+Order History | Details  
+---|---  
+![orders](https://github.com/user-attachments/assets/bb38ff4f-798c-418a-844c-c6dc33f109d7) | ![details](https://github.com/user-attachments/assets/3eab555c-0a85-4cc5-8f31-54f26f4080d0)
+
+---
+
+## 🚀 Getting Started
+
+### Clone the repository
+```bash
 git clone https://github.com/your-username/bookia.git
 cd bookia
-2. Install dependencies
-flutter pub get
-3. Run the app
-flutter run
-📦 Dependencies
-flutter_bloc: ^8.1.3
-dio: ^5.4.0
-flutter_screenutil: ^5.9.0
-easy_localization: ^3.0.3
-lottie: ^3.0.0
-iconly: ^1.0.1
-📂 Project Structure
-core/        → Shared widgets, helpers, theme
-features/    → App modules (cart, order, auth...)
-data/        → Models & repositories
-cubit/       → State management
-ui/          → Screens & widgets
-🎯 Future Improvements
-Payment gateway integration 💳
-Push notifications 🔔
-Admin dashboard 📊
-Offline mode support 📱
-Better caching system ⚡
-👨‍💻 Developer
-
-John Adel
-Flutter Developer
-📍 Egypt
-
-
